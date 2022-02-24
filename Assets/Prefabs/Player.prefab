@@ -664,7 +664,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5497722230091498157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -856,8 +856,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _detAngleLow
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _noiseAmount
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _detAngleHigh
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _cellPhoneLight
@@ -867,6 +875,10 @@ PrefabInstance:
       propertyPath: _colorNothing.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _detectionPoint
+      value: 
+      objectReference: {fileID: 3749845047213396244}
     - target: {fileID: 1818261501, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.275

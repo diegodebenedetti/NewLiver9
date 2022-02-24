@@ -10,7 +10,7 @@ public class CellphoneController : MonoBehaviour
     [Header("Cellphone detection")]
     [SerializeField] float _distance;
     [SerializeField] float _radius; 
-    [SerializeField] float _detAngleHigh, _detAngleMid, _detAngleLow;
+    [SerializeField] float _detAngleHigh, _detAngleLow;
     [SerializeField] Transform _detectionPoint; 
     [SerializeField] LayerMask _enemyLayer;
 
@@ -85,8 +85,8 @@ public class CellphoneController : MonoBehaviour
         _pingTimer = 0f;
     } 
     float EnemyDistance() => Vector3.Distance(transform.position, _enemyAI.transform.position);
-    Vector3 EnemyDirection() => _enemyAI.transform.position - transform.position;
-    float AngleToEnemy() => Vector3.Angle(_detectionPoint.forward, EnemyDirection());
+    Vector3 EnemyDirection() => _enemyAI.transform.position - _detectionPoint.position;
+    float AngleToEnemy() => Vector3.Angle(new Vector3(EnemyDirection().x, 0, EnemyDirection().z),new Vector3(_detectionPoint.forward.x,0, _detectionPoint.forward.z));
     IEnumerator Detect()
     {
         while(true)
@@ -98,18 +98,19 @@ public class CellphoneController : MonoBehaviour
  
                 if(enemy)
                 { 
+                    DebugText.instance.text.text = ($"Angle to enemy: {AngleToEnemy()}");
                     DoDetectionEffect(); 
-                    if(Vector3.Angle(_detectionPoint.forward, EnemyDirection()) <= _detAngleHigh)   
+                    if(AngleToEnemy() <= _detAngleHigh)   
                         _enemyAI.Scare();   
                     
                     _scareAmt.text = $"{(int)_enemyScare}";
                     _enemyCloseness.text = AngleToEnemy() >= _detAngleLow ? "Ghost near view" :
-                                      AngleToEnemy() >= _detAngleMid ? "Ghost is close" : 
-                                      AngleToEnemy() <= _detAngleHigh ? "Ghost in view!" : "Ghost in view!";
+                                      AngleToEnemy() >= _detAngleHigh ? "Ghost is close" : 
+                                      AngleToEnemy() <= _detAngleHigh ? "Ghost in view!" : "...No ghost";
                                     
                     _detector.color = AngleToEnemy() >= _detAngleLow ? _colorLow :
-                                      AngleToEnemy() >= _detAngleMid ? _colorMid : 
-                                      AngleToEnemy() <= _detAngleHigh ? _colorHigh : _colorHigh;
+                                      AngleToEnemy() >= _detAngleHigh ? _colorMid : 
+                                      AngleToEnemy() <= _detAngleHigh ? _colorHigh : _colorNothing;
                                       
                     // Aca cambio a escopeta cuando materializa enemigo
                     // if(_enemyAI.Materialized)
