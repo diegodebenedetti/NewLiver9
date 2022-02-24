@@ -10,7 +10,7 @@ public class CellphoneController : MonoBehaviour
     [Header("Cellphone detection")]
     [SerializeField] float _distance;
     [SerializeField] float _radius; 
-    [SerializeField] float _detAngle;
+    [SerializeField] float _detAngleHigh, _detAngleMid, _detAngleLow;
     [SerializeField] Transform _detectionPoint; 
     [SerializeField] LayerMask _enemyLayer;
 
@@ -22,8 +22,12 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] float _pingTimeMin;
     [SerializeField] float _noiseAmount; 
     
-    [SerializeField] MeshRenderer render;
-    [SerializeField] Image img;
+    [Header("UI")]
+    [SerializeField] Image _detector;
+    [SerializeField] Image _noiseScreen;
+    [SerializeField] TextMeshProUGUI _scareAmt, _enemyCloseness; 
+    [SerializeField] Color _colorHigh, _colorMid, _colorLow, _colorNothing;
+    [SerializeField] GameObject _cellPhoneLight;
     
     EnemyAI _enemy;
     float _pingNoise;
@@ -34,24 +38,22 @@ public class CellphoneController : MonoBehaviour
     void Start() => EnemyAI.OnEnemyScareChange += HandleScareChange;
 
     void OnEnable()
-    {
+    { 
+        _cellPhoneLight.SetActive(true);
         StartCoroutine(Detect());
     }
 
-    void OnDisable()
-    {
-        StopAllCoroutines();
-    }
-
-    void HandleScareChange(float scareAmount) 
-        => _enemyScare = scareAmount;
-    void Update()
+    void OnDisable() 
     { 
+        _cellPhoneLight.SetActive(false);
+        StopCoroutine(Detect());
     }
-
+    void HandleScareChange(float scareAmount) 
+        => _enemyScare = scareAmount; 
+    
     private void DoDetectionEffect()
     {   
-        render.material.SetFloat("_NoiseAmount", _distance / EnemyDistance() * _noiseAmount);
+        _noiseScreen.material.SetFloat("_NoiseAmount", _distance / EnemyDistance() * _noiseAmount);
         PerformPingNoise(); 
     }
 
@@ -78,6 +80,7 @@ public class CellphoneController : MonoBehaviour
     } 
     float EnemyDistance() => Vector3.Distance(transform.position, _enemy.transform.position);
     Vector3 EnemyDirection() => _enemy.transform.position - transform.position;
+    float AngleToEnemy() => Vector3.Angle(_detectionPoint.forward, EnemyDirection());
     IEnumerator Detect()
     {
         while(true)
@@ -88,21 +91,28 @@ public class CellphoneController : MonoBehaviour
 
                 if(_enemy)
                 { 
-                    DoDetectionEffect();
-                    if(Vector3.Angle(_detectionPoint.forward, EnemyDirection()) <= _detAngle)  
-                    {
-                        Debug.Log("Is inside");
-                        _enemy.Scare();  
-                    }
-                    else
-                    { 
-                        Debug.Log("Not inside");
-                        ResetPingTimer();
-                    }
+                    DoDetectionEffect(); 
+                    if(Vector3.Angle(_detectionPoint.forward, EnemyDirection()) <= _detAngleHigh)   
+                        _enemy.Scare();   
+                    
+                    _scareAmt.text = $"{(int)_enemyScare}";
+                    _enemyCloseness.text = AngleToEnemy() >= _detAngleLow ? "Ghost near view" :
+                                      AngleToEnemy() >= _detAngleMid ? "Ghost is close" : 
+                                      AngleToEnemy() <= _detAngleHigh ? "Ghost in view!" : "Ghost in view!";
+                                    
+                    _detector.color = AngleToEnemy() >= _detAngleLow ? _colorLow :
+                                      AngleToEnemy() >= _detAngleMid ? _colorMid : 
+                                      AngleToEnemy() <= _detAngleHigh ? _colorHigh : _colorHigh;
+
                 }
                 else
-                    render.material.SetFloat("_NoiseAmount", 0f);
-                Debug.Log("Runnings");
+                {
+                    _scareAmt.text = ""; 
+                    _enemyCloseness.text = "...No ghost";
+                    _detector.color = _colorNothing;
+                    _noiseScreen.material.SetFloat("_NoiseAmount", 0f);
+                    ResetPingTimer();
+                } 
             }
             catch(Exception e)
             { 
@@ -110,6 +120,5 @@ public class CellphoneController : MonoBehaviour
             } 
             yield return null; 
         }
-        Debug.Log("Exit coroutine");
     }
 }

@@ -95,8 +95,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _Amount: 0.008
-    - _AnimationSpeed: 1
+    - _Amount: 0.05
+    - _AnimationSpeed: 0.05
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0

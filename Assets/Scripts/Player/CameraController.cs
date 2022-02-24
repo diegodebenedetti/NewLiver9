@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         _mouseEnable = false;
+        SetMouse();
     }
     void Update()
     {  
