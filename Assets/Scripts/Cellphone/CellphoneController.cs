@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class CellphoneController : MonoBehaviour
-{
+{ 
     [Header("Cellphone detection")]
     [SerializeField] float _distance;
     [SerializeField] float _radius; 
@@ -28,14 +28,20 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] TextMeshProUGUI _scareAmt, _enemyCloseness; 
     [SerializeField] Color _colorHigh, _colorMid, _colorLow, _colorNothing;
     [SerializeField] GameObject _cellPhoneLight;
-    
-    EnemyAI _enemy;
+    [SerializeField] Inventory _inventory;
+    EnemyAI _enemyAI;
+    GameObject _enemy;
     float _pingNoise;
     float _pingTime;
     float _pingTimer;
     float _enemyScare;
     RaycastHit _hit;
-    void Start() => EnemyAI.OnEnemyScareChange += HandleScareChange;
+    void Start()
+    {
+        _enemy = GameObject.FindObjectOfType<EnemyAI>().gameObject;
+        _enemyAI = _enemy?.GetComponent<EnemyAI>();
+        EnemyAI.OnEnemyScareChange += HandleScareChange;
+    }
 
     void OnEnable()
     { 
@@ -78,22 +84,23 @@ public class CellphoneController : MonoBehaviour
         _pingTime = 0f;
         _pingTimer = 0f;
     } 
-    float EnemyDistance() => Vector3.Distance(transform.position, _enemy.transform.position);
-    Vector3 EnemyDirection() => _enemy.transform.position - transform.position;
+    float EnemyDistance() => Vector3.Distance(transform.position, _enemyAI.transform.position);
+    Vector3 EnemyDirection() => _enemyAI.transform.position - transform.position;
     float AngleToEnemy() => Vector3.Angle(_detectionPoint.forward, EnemyDirection());
     IEnumerator Detect()
     {
         while(true)
         {
+            GameObject enemy;
             try
             {
-                _enemy = Physics.OverlapSphere(transform.position, _radius, _enemyLayer).FirstOrDefault()?.GetComponent<EnemyAI>();
-
-                if(_enemy)
+                enemy = Physics.OverlapSphere(transform.position, _radius, _enemyLayer).FirstOrDefault(x => x.gameObject == _enemy)?.gameObject;
+ 
+                if(enemy)
                 { 
                     DoDetectionEffect(); 
                     if(Vector3.Angle(_detectionPoint.forward, EnemyDirection()) <= _detAngleHigh)   
-                        _enemy.Scare();   
+                        _enemyAI.Scare();   
                     
                     _scareAmt.text = $"{(int)_enemyScare}";
                     _enemyCloseness.text = AngleToEnemy() >= _detAngleLow ? "Ghost near view" :
@@ -103,6 +110,10 @@ public class CellphoneController : MonoBehaviour
                     _detector.color = AngleToEnemy() >= _detAngleLow ? _colorLow :
                                       AngleToEnemy() >= _detAngleMid ? _colorMid : 
                                       AngleToEnemy() <= _detAngleHigh ? _colorHigh : _colorHigh;
+                                      
+                    // Aca cambio a escopeta cuando materializa enemigo
+                    // if(_enemyAI.Materialized)
+                    //     _inventory.ChangeInventory(1);
 
                 }
                 else
@@ -111,6 +122,11 @@ public class CellphoneController : MonoBehaviour
                     _enemyCloseness.text = "...No ghost";
                     _detector.color = _colorNothing;
                     _noiseScreen.material.SetFloat("_NoiseAmount", 0f);
+
+                    // Aca vuelvo al telefono
+                    // if(_enemyAI.Materialized)
+                    //     _inventory.ChangeInventory(0);
+
                     ResetPingTimer();
                 } 
             }

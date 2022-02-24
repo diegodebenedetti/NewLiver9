@@ -65,7 +65,10 @@ public class CameraController : MonoBehaviour
         else
         {
              if(transform.localPosition.y <= _minHeadBobY)
+             {
                 _bobUp = true;
+                _audioController.PlaySound(1f); 
+             }
             else
                 y = transform.localPosition.y - Time.deltaTime * _headBobbingSpeed;
         }
@@ -83,12 +86,7 @@ public class CameraController : MonoBehaviour
                 _bobleft = true;
             else
                 x = transform.localPosition.x - Time.deltaTime * _headBobbingSpeed;
-        }
-        // x = transform.localPosition.x >= _maxHeadBobX ? (transform.localPosition.x - (Time.deltaTime * _headBobbingSpeed)) : 
-        // transform.localPosition.x <= _minHeadBobX ? (transform.localPosition.x + (Time.deltaTime * _headBobbingSpeed)) : 0;
-
-        // y = transform.localPosition.y >= _maxHeadBobY ? (transform.localPosition.y - (Time.deltaTime * _headBobbingSpeed)) : 
-        // transform.localPosition.y <= _minHeadBobY ? (transform.localPosition.y + (Time.deltaTime * _headBobbingSpeed)) : 0;
+        } 
 
         transform.localPosition = new Vector3(x,y);
     }
