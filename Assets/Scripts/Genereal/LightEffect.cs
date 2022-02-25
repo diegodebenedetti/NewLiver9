@@ -7,15 +7,16 @@ public class LightEffect : MonoBehaviour
     [SerializeField] float _maxTime, _minTime, _intensityMax, _intensityMin, _flickerdurationmin, _flickerdurationmax;   
 
     Light _light;
-    float _timer, _originalIntesity;
+    float _timer, _originalIntesity, _enemyScare;
     void Start() 
     { 
+        EnemyAI.OnEnemyScareChange += EnemyScare;
         TryGetComponent<Light>(out _light);
         _originalIntesity = _light.intensity;
         _timer = Random.Range(_minTime, _maxTime);
     }
 
-
+    void EnemyScare(float scare) => _enemyScare = scare;
     void OnEnable() => StartCoroutine(Flicker());
     void OnDisable() => StopAllCoroutines();
      
