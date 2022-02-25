@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AudioController : MonoBehaviour
 {
-    [SerializeField] List<AudioClip> _clips; 
+    [SerializeField] List<AudioClip> _clips;
+    [SerializeField] float _pitchMin, _pitchMax;
      
     AudioSource _source;
     void Start() 
@@ -16,6 +17,13 @@ public class AudioController : MonoBehaviour
     {    
         _source.clip = _clips[Random.Range(0, _clips.Count)];
         _source.pitch = value; 
+        _source.Play();
+    }
+
+    public void PlaySound()
+    {
+        _source.clip = _clips[Random.Range(0, _clips.Count)];
+        _source.pitch = Random.Range(_pitchMin, _pitchMax);
         _source.Play();
     }
 }

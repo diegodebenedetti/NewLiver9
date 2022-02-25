@@ -5,19 +5,17 @@ public class Weapon : MonoBehaviour
 {    
     [SerializeField] GameObject _projectile;
     [SerializeField] Transform _shootPoint;
-    [SerializeField] float _pellets, _spread,_rateOfFire, _shakeTime, _shakeAmplitude,_audioPitchMin, _audioPitchMax;
+    [SerializeField] float _pellets, _spread,_rateOfFire, _shakeTime, _shakeAmplitude;
     [SerializeField] UnityEvent _shootEvent;
     [SerializeField] Vector3 _shakeDirection;
     private CameraController _cameraController;
-    private Animator _anim;
-    private AudioController _audioController;
+    private Animator _anim; 
     private float _currentRate;
 
     private void Awake()
     {
         _anim = GetComponent<Animator>();
-        _cameraController = GetComponentInParent<CameraController>();
-        _audioController = GetComponent<AudioController>();
+        _cameraController = GetComponentInParent<CameraController>(); 
         _currentRate = _rateOfFire;
     }
 
@@ -40,8 +38,7 @@ public class Weapon : MonoBehaviour
     public void Shoot()
     { 
         _anim.SetTrigger("shoot");
-        _shootEvent.Invoke();
-        _audioController.PlaySound(Random.Range(_audioPitchMin, _audioPitchMax));
+        _shootEvent.Invoke(); 
         _cameraController.Shake(_shakeTime, _shakeDirection, _shakeAmplitude);
         for(int i = 0; i < _pellets ; i++)
         {
