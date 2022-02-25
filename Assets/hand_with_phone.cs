@@ -10,7 +10,9 @@ public class hand_with_phone : MonoBehaviour
     {
         
     }
-
+    public void pressPhoneButtonAnimation() {
+        phone_animator.SetTrigger("pressbutton");
+    }
     // Update is called once per frame
     void Update()
     {
