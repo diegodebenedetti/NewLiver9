@@ -71,6 +71,7 @@ public class EnemyAI : MonoBehaviour
     private EnemyState _currentState;
     private Transform _myTransform;
     private Transform _playerTransform;
+    private RotatinMasksController _masksController;
 
     //ENEMY TREATS
     private bool _canReceiveDamage;
@@ -108,11 +109,34 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
         _navmeshAgent = GetComponent<NavMeshAgent>();
+        _masksController = GetComponent<RotatinMasksController>();
+        
         _myTransform = transform;
         _playerTransform = _player.transform;
         _escapeThresholdindex = 0;
         _currentEscapeThreshold = _escapeThresholds[_escapeThresholdindex];
         _currentHealth = _maxHealth;
+    }
+
+    private void Start()
+    {
+        SpawnMasks();
+    }
+
+    private void SpawnMasks()
+    {
+
+        for (int i = 0; i < _escapeThresholds.Length - 1; i++)
+        {
+            if (i % 2 == 0)
+            {
+                _masksController.SpawnMask(100);
+            }
+            else
+            {
+                _masksController.SpawnMask(-100);
+            }
+        }
     }
 
     private void SendEventOfScareLevel() => OnEnemyScareChange.Invoke(_currentScareLevel);
@@ -282,6 +306,7 @@ public class EnemyAI : MonoBehaviour
         if (!_isEscapingInitialized)
         {
             InitializeEscapingState();
+            _masksController.DestroyMask();
             Escape();
         }
 
@@ -347,18 +372,21 @@ public class EnemyAI : MonoBehaviour
     private void SetStateHIding()
     {
         _currentState = EnemyState.Hiding;
+        OnStateChange.Invoke(_currentState);
     }
 
     [ContextMenu("Scare the Motherfucker")]
     private void SetStateScared()
     {
         _currentState = EnemyState.Scared;
+        OnStateChange.Invoke(_currentState);
     }
 
     [ContextMenu("Materialize the Motherfucker")]
     private void SetStateMaterialized()
     {
         _currentState = EnemyState.Materialized;
+        OnStateChange.Invoke(_currentState);
     }
 
     #endregion
