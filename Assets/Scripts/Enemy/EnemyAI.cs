@@ -8,9 +8,8 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyAI : MonoBehaviour
 {
-    public static event Action OnReadyToMaterialize = delegate { };
+    public static event Action<EnemyState> OnStateChange = delegate { };
     public static event Action<float> OnEnemyScareChange = delegate { };
-    
     public static event Action OnEnemyDied = delegate {  };
 
     [Header("General Dependencies")] 
@@ -91,6 +90,7 @@ public class EnemyAI : MonoBehaviour
 
     //Materialized
     private bool _canMaterialize;
+    private bool _readyForMaterialize;
     private bool _isMaterializedInitialized;
     private float _onMaterializedTimer;
 
@@ -102,6 +102,7 @@ public class EnemyAI : MonoBehaviour
     //Dead
     private bool _isDead;
     private float _currentHealth;
+   
 
 
     private void Awake()
@@ -274,7 +275,6 @@ public class EnemyAI : MonoBehaviour
         _enemyModel.SetActive(true);
         _canReceiveDamage = true;
         _navmeshAgent.speed = _onMaterializeddMovementSpeed;
-        OnReadyToMaterialize.Invoke();
     }
 
     private void OnEscaping()
@@ -390,11 +390,18 @@ public class EnemyAI : MonoBehaviour
                 if (_currentScareLevel >= _materializeThreshold)
                 {
                     _currentScareLevel = _materializeThreshold;
-                    _canMaterialize = true;
+                    _readyForMaterialize = true;
                 }
 
                 break;
         }
+    }
+
+    public void Materialize()
+    {
+        if(!_readyForMaterialize) return;
+
+        _canMaterialize = true;
     }
 
     public void SetMovementArea(BoxCollider pMovementArea)
@@ -418,15 +425,17 @@ public class EnemyAI : MonoBehaviour
     private void ChangeState(EnemyState pState)
     {
         _currentState = pState;
+        OnStateChange(_currentState);
         Debug.Log(_currentState.ToString());
     }
 
     private void ResetPlayerState()
     {
         _currentScareLevel = 0;
-        
-        _canEscape = false;
+
         _canMaterialize = false;
+        _canEscape = false;
+        _readyForMaterialize = false;
         _canScare = false;
 
         _isHidingInitialized = false;

@@ -39,7 +39,7 @@
     {
         "name": "Unity Editor",
         "type": "unity",
-        "path": "/C:/Users/Admin/Documents/gameprojects/Liver9/Liver9/Library/EditorInstance.json",
+        "path": "/C:/Users/Admin/Documents/gameprojects/NewLiver9/Library/EditorInstance.json",
         "request": "launch"
     }
     ]

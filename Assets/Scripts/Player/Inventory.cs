@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     int _currentIem;
   
     void Start()
-    {
+    { 
         _currentIem = 0;
     }
     void Update()
@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour
             ChangeInventory(-1);
 
     }
-
+    
     void ChangeInventory(int i)
     { 
         if(i > 0) 
@@ -38,4 +38,5 @@ public class Inventory : MonoBehaviour
         for(int i = 0; i < _items.Count; i++)
             _items[i].SetActive(i == _currentIem);
     }
+     
 }
