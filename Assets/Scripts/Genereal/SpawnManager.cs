@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Core;
 using UnityEngine;
@@ -6,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class SpawnManager : Singleton<SpawnManager>
 {
+    [Header("Enemy")]
     [SerializeField]
     private EnemyAI _enemy;
 
@@ -14,14 +14,18 @@ public class SpawnManager : Singleton<SpawnManager>
 
     [SerializeField] 
     private Transform _escapeRoute;
-
+  
+    
+    [Header("Bullets")]
     [SerializeField] private GameObject _bulletsPool;
     [SerializeField] private Bullet _bulletPrefab;
-    
     private Queue<Bullet> _bullets = new Queue<Bullet>();
+    
+    
     private float ammountOfBullets = 80;
     
     private int _locationAssignedForEnemy;
+   
     
 
     private void Start()
@@ -67,9 +71,9 @@ public class SpawnManager : Singleton<SpawnManager>
     private Transform SelectRandomSpawnLocation()
     {
         var randomIndex = 0;
-        while (randomIndex != _locationAssignedForEnemy)
+        while (randomIndex == _locationAssignedForEnemy)
         {
-            randomIndex = Random.Range(0, _enemySpawnLocations.Length + 1);
+            randomIndex = Random.Range(0, _enemySpawnLocations.Length);
         }
         _locationAssignedForEnemy = randomIndex;
         return _enemySpawnLocations[randomIndex].GetSpawnPoint;
