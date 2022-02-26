@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         
         if (enemy != null)
         {
-            enemy.Damage(1f);
+            enemy.Damage(1.5f);
             ResetBullet();
             
         }
