@@ -6,6 +6,10 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _bulletSpeed;
     private Rigidbody _bulletRb;
+
+    [SerializeField]
+    private ParticleSystem _bloodParticle;
+    
     
 
     private void Awake()
@@ -28,6 +32,10 @@ public class Bullet : MonoBehaviour
         if (enemy != null)
         {
             enemy.Damage(1.5f);
+            var contactPoint = collision.contacts[0];
+            var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
+            var particle = Instantiate(_bloodParticle, contactPoint.point, rotation);
+            particle.Play();
             ResetBullet();
             
         }
@@ -35,6 +43,7 @@ public class Bullet : MonoBehaviour
         ResetBullet();
         
     }
+    
 
     private void ResetBullet()
     {
