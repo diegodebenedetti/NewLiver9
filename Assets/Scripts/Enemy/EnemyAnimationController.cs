@@ -51,6 +51,7 @@ public class EnemyAnimationController : MonoBehaviour
         _enemyBody.SetActive(false);
         _explodingEnemyBody.gameObject.SetActive(true);
         _explodingEnemyBody.Explode();
+        AudioManager.Instance.Play("monsterexplode");
     }
 
 }

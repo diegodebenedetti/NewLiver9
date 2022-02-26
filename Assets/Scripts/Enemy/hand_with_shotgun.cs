@@ -6,14 +6,7 @@ public class hand_with_shotgun : MonoBehaviour
 {
 
     public Animator shotgun_animator;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    
-
+ 
     // Update is called once per frame
     void Update()
     {
@@ -21,7 +14,7 @@ public class hand_with_shotgun : MonoBehaviour
         {
             shotgun_animator.SetTrigger("shoot");
             Debug.Log("shotgun");
-            AudioManager.instance.Play("shotgun");
+            AudioManager.Instance.Play("shotgun");
         }
     }
 }

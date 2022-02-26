@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using Random = System.Random;
 
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -377,8 +378,9 @@ public class EnemyAI : MonoBehaviour
         if (_currentHealth <= 0) return;
         
         _currentHealth -= pAmount;
+        var ouchindex = UnityEngine.Random.Range(0, 2);
+        AudioManager.Instance.Play($"Ouch{ouchindex}");
         OnHitRecieved.Invoke();
-        Debug.Log($"Ouch -{pAmount}");
     }
 
     public void Scare()

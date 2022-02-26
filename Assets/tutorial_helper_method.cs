@@ -53,9 +53,9 @@ public class tutorial_helper_method : MonoBehaviour
         {
             currentState = TutorialStates.IntroductionLetter;
             yield return new WaitForSeconds(2f);
-            AudioManager.instance.Play("timetogetthisjobdone");
+            AudioManager.Instance.Play("timetogetthisjobdone");
             yield return new WaitForSeconds(2f);
-            AudioManager.instance.Play("swish");
+            AudioManager.Instance.Play("swish");
             popup_neighborhood_message.SetActive(true);
             currentState = TutorialStates.IntroductionLetterDone;
             yield return null;
@@ -67,11 +67,11 @@ public class tutorial_helper_method : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             handWithPhone.SetActive(true);
             yield return new WaitForSeconds(0.5f);
-            AudioManager.instance.Play("thismightcomeinhandy");
+            AudioManager.Instance.Play("thismightcomeinhandy");
             handWithPhone.GetComponent<hand_with_phone>().pressPhoneButtonAnimation();
             yield return new WaitForSeconds(2f);
             popup_phone_tutorial.SetActive(true);
-            AudioManager.instance.Play("swish");
+            AudioManager.Instance.Play("swish");
             currentState = TutorialStates.showPhoneTutorialDone;
 
         } else if (currentState == TutorialStates.showPhoneTutorialDone) {
@@ -80,7 +80,7 @@ public class tutorial_helper_method : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             handWithShotgun.SetActive(true);
             yield return new WaitForSeconds(0.5f);
-            AudioManager.instance.Play("imightneedthis");
+            AudioManager.Instance.Play("imightneedthis");
             yield return new WaitForSeconds(0.5f);
             press_left_click_to_fire_msg.SetActive(true);
             currentState = TutorialStates.shotgunTutorialWaitForFire;
@@ -90,7 +90,7 @@ public class tutorial_helper_method : MonoBehaviour
             handWithPhone.SetActive(true);
             yield return new WaitForSeconds(0.2f);
             handWithShotgun.SetActive(false);
-            AudioManager.instance.Play("timetogo");
+            AudioManager.Instance.Play("timetogo");
 
         }
     }
