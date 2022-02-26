@@ -29,6 +29,7 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] Image _detector;
     [SerializeField] Image _noiseScreen;
     [SerializeField] TextMeshProUGUI _scareAmt, _enemyCloseness; 
+    [SerializeField] GameObject _materializeText;
     [SerializeField] Color _colorHigh, _colorMid, _colorLow, _colorNothing;
     [SerializeField] LightEffect _cellPhoneLight;
     [SerializeField] Inventory _inventory;
@@ -117,12 +118,22 @@ public class CellphoneController : MonoBehaviour
                     DoDetectionEffect(); 
                     if(AngleToEnemy() <= _detAngleHigh)  
                     {
-                        _enemyAI.Scare();   
-                        if(_enemyScare >= 98f && Input.GetButtonDown("Fire1"))
+                        _enemyAI.Scare(); 
+
+                        if(_enemyScare >= 98f )
                         {
-                            _cellPhoneLight.DoFlash();
-                            _enemyAI.Materialize(); 
+                            _materializeText.SetActive(true);
+                            if(Input.GetButtonDown("Fire1"))
+                            {
+                                _cellPhoneLight.DoFlash();
+                                _enemyAI.Materialize();  
+                            }
                         }
+                        else
+                        { 
+                            _materializeText.SetActive(false);
+                        }
+                         
                     } 
                     
                     _scareAmt.text = $"{(int)_enemyScare}";
