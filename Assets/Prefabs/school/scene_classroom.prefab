@@ -512,6 +512,8 @@ GameObject:
   - component: {fileID: 426026592134349322}
   - component: {fileID: 7818813683968477488}
   - component: {fileID: 2211668247140242457}
+  - component: {fileID: 4079483603280424727}
+  - component: {fileID: 8339908997642783691}
   m_Layer: 0
   m_Name: Plane.014
   m_TagString: Untagged
@@ -586,6 +588,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4079483603280424727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3566683627778021152}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.073661484, y: 5.609618, z: 14.600435}
+  m_Center: {x: 0.033976395, y: -0.9255867, z: 0.020122528}
+--- !u!65 &8339908997642783691
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3566683627778021152}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.030243874, y: 5.609618, z: 14.600435}
+  m_Center: {x: 13.703205, y: -0.9255867, z: 0.020122528}
 --- !u!1 &3926171134263467044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,6 +1468,7 @@ GameObject:
   - component: {fileID: 1279962761022456640}
   - component: {fileID: 7362181913068619556}
   - component: {fileID: 5072606605016543742}
+  - component: {fileID: 8437406172769453722}
   m_Layer: 0
   m_Name: scene_classroom
   m_TagString: Untagged
@@ -1560,6 +1589,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.0968633, y: 5.6768537, z: 0.13288498}
   m_Center: {x: -3.3284605, y: 2.8142393, z: 0}
+--- !u!65 &8437406172769453722
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8594596499133437126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.2107768, y: 1.3784828, z: 0.13288498}
+  m_Center: {x: 1.8204715, y: 4.9561024, z: 0}
 --- !u!1 &8596873851649236649
 GameObject:
   m_ObjectHideFlags: 0
