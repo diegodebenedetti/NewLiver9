@@ -1,8 +1,13 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Events; 
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Weapon : MonoBehaviour
-{    
+{
+   
+    [SerializeField]
+    private GameObject _muzzleFlashLight;
     [SerializeField] GameObject _projectile;
     [SerializeField] Transform _shootPoint;
     [SerializeField] float _pellets, _spread,_rateOfFire, _shakeTime, _shakeAmplitude;
@@ -40,6 +45,7 @@ public class Weapon : MonoBehaviour
         _anim.SetTrigger("shoot");
         _shootEvent.Invoke(); 
         _cameraController.Shake(_shakeTime, _shakeDirection, _shakeAmplitude);
+        StartCoroutine(MuzzleFlashLightCoroutine());
         for(int i = 0; i < _pellets ; i++)
         {
             var rand = Random.insideUnitSphere * _spread; 
@@ -54,5 +60,14 @@ public class Weapon : MonoBehaviour
             bullet.gameObject.SetActive(true);
         }
         
+    }
+
+    private IEnumerator MuzzleFlashLightCoroutine()
+    {
+        _muzzleFlashLight.SetActive(true);
+        yield return new WaitForSeconds(0.15f);
+        _muzzleFlashLight.SetActive(false);
+
+
     }
 }
