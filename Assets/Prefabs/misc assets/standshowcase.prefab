@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 61836561392101431}
   - component: {fileID: 3995937049124759442}
   - component: {fileID: 1193626364859093848}
+  - component: {fileID: 4948720980240020404}
   m_Layer: 0
   m_Name: standshowcase
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4948720980240020404
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833272218507555469}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8236118, y: 0.84337765, z: 0.16419293}
+  m_Center: {x: -0.0051189824, y: 0.42168882, z: -0.04407416}
