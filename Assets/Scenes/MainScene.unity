@@ -1885,18 +1885,6 @@ PrefabInstance:
       value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 9071020710756222606, guid: be7668c563513a541812b68c12703cfc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9071020710756222606, guid: be7668c563513a541812b68c12703cfc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9071020710756222606, guid: be7668c563513a541812b68c12703cfc, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9071020710756222606, guid: be7668c563513a541812b68c12703cfc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.77
       objectReference: {fileID: 0}
@@ -1940,10 +1928,6 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 4825543306289923871}
-    - target: {fileID: 9071020710756222607, guid: be7668c563513a541812b68c12703cfc, type: 3}
-      propertyPath: _runDistanceWhenScared
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be7668c563513a541812b68c12703cfc, type: 3}
 --- !u!114 &714714745 stripped

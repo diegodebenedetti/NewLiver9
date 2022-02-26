@@ -738,8 +738,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pivot: {fileID: 3749845047213396244}
   _rb: {fileID: 4825543306024507871}
-  _walkSpeed: 5
-  _sprintSpeed: 10
+  _walkSpeed: 4
+  _sprintSpeed: 8
   _acceleartion: 1
 --- !u!114 &509359280
 MonoBehaviour:
