@@ -5,7 +5,7 @@ using UnityEngine;
 public class LerpMovement : MonoBehaviour
 {
     [SerializeField] Transform _objective; 
-    [SerializeField] float _lerpPerc, intensity, smoothing;
+    [SerializeField] float _lerpPerc;
     
     void FixedUpdate()
     {        

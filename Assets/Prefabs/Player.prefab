@@ -135,6 +135,13 @@ MonoBehaviour:
   _intensityMin: 0
   _flickerdurationmin: 0.5
   _flickerdurationmax: 0.2
+  _scareFactor: 5
+  _flashInstenity: 50000
+  _flashTime: 0.25
+  _flashDiminshFactor: 100
+  _flashEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8333811611617773767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,8 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objective: {fileID: 3749845047213396244}
   _lerpPerc: 0.2
-  intensity: 0
-  smoothing: 0
 --- !u!1 &1203144620300225818
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,6 +859,10 @@ PrefabInstance:
       value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 188612490127866317, guid: a5b722de3cc4ecf4285c890e2f185846, type: 3}
+      propertyPath: _shakeOnEnemyAmplitude
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 188612490127866317, guid: a5b722de3cc4ecf4285c890e2f185846, type: 3}
       propertyPath: _shootEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1006,6 +1015,10 @@ PrefabInstance:
       value: 6.7121964
       objectReference: {fileID: 0}
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _shakeTime
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _colorLow.a
       value: 1
       objectReference: {fileID: 0}
@@ -1032,7 +1045,7 @@ PrefabInstance:
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _cellPhoneLight
       value: 
-      objectReference: {fileID: 856394019862100672}
+      objectReference: {fileID: 4813358282729612027}
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _colorNothing.a
       value: 1
@@ -1041,6 +1054,10 @@ PrefabInstance:
       propertyPath: _detectionPoint
       value: 
       objectReference: {fileID: 3749845047213396244}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _shakeAmplitude
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1818261501, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.275
