@@ -115,8 +115,15 @@ public class CellphoneController : MonoBehaviour
                 if(enemy)
                 {  
                     DoDetectionEffect(); 
-                    if(AngleToEnemy() <= _detAngleHigh)   
+                    if(AngleToEnemy() <= _detAngleHigh)  
+                    {
                         _enemyAI.Scare();   
+                        if(_enemyScare >= 98f && Input.GetButtonDown("Fire1"))
+                        {
+                            _cellPhoneLight.DoFlash();
+                            _enemyAI.Materialize(); 
+                        }
+                    } 
                     
                     _scareAmt.text = $"{(int)_enemyScare}";
                     _enemyCloseness.text = AngleToEnemy() >= _detAngleLow ? "Ghost near view" :
@@ -128,11 +135,7 @@ public class CellphoneController : MonoBehaviour
                                       AngleToEnemy() <= _detAngleHigh ? _colorHigh : _colorNothing;
                                        
 
-                    if(_enemyScare >= 98f && Input.GetButtonDown("Fire1"))
-                    {
-                        _cellPhoneLight.DoFlash();
-                        _enemyAI.Materialize(); 
-                    }
+                  
 
 
                 }

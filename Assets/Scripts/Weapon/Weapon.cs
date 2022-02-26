@@ -34,10 +34,10 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         _anim = GetComponent<Animator>();
-        _cameraController = GetComponentInParent<CameraController>();
-        _currentRate = _rateOfFire;
+        _cameraController = GetComponentInParent<CameraController>();       
     }
 
+    void OnEnable() => _currentRate = _rateOfFire;
     private void Start()
     {
         EnemyAI.OnStateChange += OnStateChange;
@@ -60,7 +60,7 @@ public class Weapon : MonoBehaviour
     {
         if (!_isEnemyDead)
         {
-          _cameraController.Shake(_shakeTime, _shakeDirection, _shakeOnEnemyAmplitude);
+        //   _cameraController.Shake(_shakeTime, _shakeDirection, _shakeOnEnemyAmplitude);
         }
 
         if (_currentRate < _rateOfFire)

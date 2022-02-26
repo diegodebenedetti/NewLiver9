@@ -63,6 +63,7 @@ public class LightEffect : MonoBehaviour
         _doingFlash = true;
         _flashEvent.Invoke();
         var timer = 0f;
+        
         while(timer < _flashTime)
         {
             timer += Time.deltaTime;
@@ -71,7 +72,7 @@ public class LightEffect : MonoBehaviour
         }
         _light.intensity = _originalIntesity;
         _doingFlash = false;
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);    
 
     }
   

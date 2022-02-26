@@ -138,10 +138,34 @@ MonoBehaviour:
   _scareFactor: 5
   _flashInstenity: 100
   _flashTime: 0.25
-  _flashDiminshFactor: 100
+  _flashDiminshFactor: 15
   _flashEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7609217883034981290}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: set_clip
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 78a213101d17b1f479909b69eb10da7a, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7609217883034981290}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8333811611617773767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +192,7 @@ GameObject:
   - component: {fileID: 7609217883034981290}
   - component: {fileID: 2078023488369725151}
   m_Layer: 0
-  m_Name: Sounds
+  m_Name: ShotGunSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +224,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -303,6 +327,60 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 93ea292c38ce82342ba166535eecab30, type: 3}
   _pitchMin: 0.8
   _pitchMax: 1.1
+--- !u!1 &3105748271349117002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5175847126006015629}
+  - component: {fileID: 838664777}
+  m_Layer: 0
+  m_Name: Ending
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5175847126006015629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105748271349117002}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -106.61307, y: 9.778469, z: 9.980995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4825543306024507868}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &838664777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105748271349117002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74fa8231c9f1d0d40a1bf1b88eded9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _source: {fileID: 7609217883034981290}
+  _clip: {fileID: 8300000, guid: 1bd539a506702854a9685c0deba7d80a, type: 3}
+  _sunLight: {fileID: 0}
+  _color: {r: 1, g: 0.5989302, b: 0, a: 1}
+  _sunIntesntiy: 5
+  _time: 10
+  _newSkybox: {fileID: 2100000, guid: e391f00234292cc4f935308c11cf0e54, type: 2}
+  _event:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4825543304582542677
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,6 +788,7 @@ Transform:
   - {fileID: 4825543304582542682}
   - {fileID: 4877116266566544867}
   - {fileID: 9073751752748878649}
+  - {fileID: 5175847126006015629}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1016,7 +1095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _shakeTime
-      value: 0.05
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _colorLow.a

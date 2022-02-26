@@ -869,6 +869,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 838664777, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1bd539a506702854a9685c0deba7d80a, type: 3}
+    - target: {fileID: 838664777, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _sunLight
+      value: 
+      objectReference: {fileID: 1616238051}
+    - target: {fileID: 838664777, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _sunIntesntiy
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4825543306024507868, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -916,14 +928,6 @@ PrefabInstance:
     - target: {fileID: 4825543306024507870, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5717862189097654863, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: _shakeTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5717862189097654863, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: _shakeAmplitude
-      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
@@ -4383,6 +4387,13 @@ MonoBehaviour:
   _intensityMin: 0
   _flickerdurationmin: 0
   _flickerdurationmax: 0
+  _scareFactor: 0
+  _flashInstenity: 0
+  _flashTime: 0
+  _flashDiminshFactor: 0
+  _flashEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1601718634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5435,6 +5446,13 @@ MonoBehaviour:
   _intensityMin: 0
   _flickerdurationmin: 0
   _flickerdurationmax: 0
+  _scareFactor: 0
+  _flashInstenity: 0
+  _flashTime: 0
+  _flashDiminshFactor: 0
+  _flashEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1982969747
 MonoBehaviour:
   m_ObjectHideFlags: 0
