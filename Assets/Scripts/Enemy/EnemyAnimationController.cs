@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class EnemyAnimationController : MonoBehaviour
 {
+    
+    [SerializeField]
+    private enemyCellFracture _explodingEnemyBody;
 
+    [SerializeField]
+    private GameObject _enemyBody;
+    
     private Animator _anim;
-    private readonly int _movementSpeed = Animator.StringToHash("movementSpeed");
 
+    private readonly int _movementSpeed = Animator.StringToHash("movementSpeed");
     private void Awake()
     {
         _anim = GetComponentInChildren<Animator>();
@@ -34,10 +40,17 @@ public class EnemyAnimationController : MonoBehaviour
                 break;
             case EnemyState.Dead:
                 _anim.speed = 0;
+                ExplodeEnemy();
                 break;
            
         }
     }
 
+    private void ExplodeEnemy()
+    {
+        _enemyBody.SetActive(false);
+        _explodingEnemyBody.gameObject.SetActive(true);
+        _explodingEnemyBody.Explode();
+    }
 
 }

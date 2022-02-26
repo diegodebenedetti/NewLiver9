@@ -8,20 +8,8 @@ public class enemyCellFracture : MonoBehaviour
     public float min_explosionForce;
     public float max_explosionForce;
     public float radius;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Rigidbodys = GetComponentsInChildren<Rigidbody>();
-        explodeEnemy();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void explodeEnemy() {
+    
+    public void Explode() {
         foreach (Rigidbody rb in Rigidbodys)
         {
             rb.AddExplosionForce(Random.Range(min_explosionForce,max_explosionForce), transform.position, radius);
