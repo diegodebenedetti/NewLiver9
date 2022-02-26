@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 150
-  _bloodParticle: {fileID: 4631417219109598161, guid: a5aa126f98b5043498d2e800b6a88dc5, type: 3}
+  _bloodParticle: {fileID: 4631417219109598161, guid: cd50e752f1434399897257ce8a35504f, type: 3}
 --- !u!54 &2133042699968265953
 Rigidbody:
   m_ObjectHideFlags: 0
