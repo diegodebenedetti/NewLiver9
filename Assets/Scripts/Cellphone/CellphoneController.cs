@@ -37,14 +37,30 @@ public class CellphoneController : MonoBehaviour
     CameraController _cameraController;
     float _pingNoise, _pingTime, _pingTimer, _enemyScare;
     RaycastHit _hit;
+    private bool _isEnemyDead;
+
     void Start()
     {
         _enemy = GameObject.FindObjectOfType<EnemyAI>().gameObject;
         _enemyAI = _enemy?.GetComponent<EnemyAI>();
         _cameraController = GetComponentInParent<CameraController>();
-        EnemyAI.OnEnemyScareChange += HandleScareChange; 
+        EnemyAI.OnEnemyScareChange += HandleScareChange;
+        EnemyAI.OnStateChange += OnStateChange;
     }
- 
+
+    private void OnStateChange(EnemyState pState)
+    {
+        switch (pState)
+        {
+            case EnemyState.Dead:
+                _shakeAmplitude = 0;
+                _shakeTime = 0;
+                _isEnemyDead = true;
+                
+                break;
+        }
+    }
+
     void OnEnable()
     { 
         _cellPhoneLight.gameObject.SetActive(true);
@@ -58,7 +74,8 @@ public class CellphoneController : MonoBehaviour
     {   
         _noiseScreen.material.SetFloat("_NoiseAmount", _distance / EnemyDistance() * _noiseAmount);
         PerformPingNoise();
-        ShakeCamera(); 
+        if(!_isEnemyDead)
+            ShakeCamera(); 
     }
 
     private void PerformPingNoise()
@@ -111,7 +128,7 @@ public class CellphoneController : MonoBehaviour
                                       AngleToEnemy() <= _detAngleHigh ? _colorHigh : _colorNothing;
                                        
 
-                    if(_enemyScare <= 100f && Input.GetButtonDown("Fire1"))
+                    if(_enemyScare >= 98f && Input.GetButtonDown("Fire1"))
                     {
                         _cellPhoneLight.DoFlash();
                         _enemyAI.Materialize(); 

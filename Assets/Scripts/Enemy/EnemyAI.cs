@@ -288,6 +288,7 @@ public class EnemyAI : MonoBehaviour
         if (!_isEscapingInitialized)
         {
             InitializeEscapingState();
+            AudioManager.Instance.Play("Escape");
             _masksController.DestroyMask();
             Escape();
         }

@@ -136,7 +136,7 @@ MonoBehaviour:
   _flickerdurationmin: 0.5
   _flickerdurationmax: 0.2
   _scareFactor: 5
-  _flashInstenity: 50000
+  _flashInstenity: 100
   _flashTime: 0.25
   _flashDiminshFactor: 100
   _flashEvent:
