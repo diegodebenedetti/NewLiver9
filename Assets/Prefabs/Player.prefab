@@ -1278,6 +1278,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -46.54001
       objectReference: {fileID: 0}
+    - target: {fileID: 1716956195900897617, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 68a05c3386547524a8c12709f52987ec, type: 2}
+    - target: {fileID: 1716956195900897617, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6880909201734451110, guid: 68a05c3386547524a8c12709f52987ec, type: 2}
+    - target: {fileID: 2094578653068165611, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 68a05c3386547524a8c12709f52987ec, type: 2}
+    - target: {fileID: 2094578653068165611, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6880909201734451110, guid: 68a05c3386547524a8c12709f52987ec, type: 2}
     - target: {fileID: 2799262797554205841, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: m_Cookie
       value: 
@@ -1288,7 +1304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3174450776390284939, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6054996281600690892, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1326,6 +1342,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: hand_with_phone
       objectReference: {fileID: 0}
+    - target: {fileID: 7507251778458436894, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 68a05c3386547524a8c12709f52987ec, type: 2}
+    - target: {fileID: 7507251778458436894, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6880909201734451110, guid: 68a05c3386547524a8c12709f52987ec, type: 2}
     - target: {fileID: 7711679133910839632, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: m_RootOrder
       value: 1
