@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour
 {
     public static event Action<EnemyState> OnStateChange = delegate { };
     public static event Action<float> OnEnemyScareChange = delegate { };
+    public static event Action OnHitRecieved = delegate {};
     public static event Action OnEnemyDied = delegate {  };
 
     [Header("General Dependencies")] 
@@ -71,6 +72,7 @@ public class EnemyAI : MonoBehaviour
     private EnemyState _currentState;
     private Transform _myTransform;
     private Transform _playerTransform;
+    private RotatinMasksController _masksController;
 
     //ENEMY TREATS
     private bool _canReceiveDamage;
@@ -108,11 +110,35 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
         _navmeshAgent = GetComponent<NavMeshAgent>();
+        _masksController = GetComponent<RotatinMasksController>();
+        
         _myTransform = transform;
         _playerTransform = _player.transform;
         _escapeThresholdindex = 0;
         _currentEscapeThreshold = _escapeThresholds[_escapeThresholdindex];
         _currentHealth = _maxHealth;
+    }
+
+    private void Start()
+    {
+        ChangeState(EnemyState.Hiding);
+        SpawnMasks();
+    }
+
+    private void SpawnMasks()
+    {
+
+        for (int i = 0; i < _escapeThresholds.Length - 1; i++)
+        {
+            if (i % 2 == 0)
+            {
+                _masksController.SpawnMask(100);
+            }
+            else
+            {
+                _masksController.SpawnMask(-100);
+            }
+        }
     }
 
     private void SendEventOfScareLevel() => OnEnemyScareChange.Invoke(_currentScareLevel);
@@ -218,23 +244,7 @@ public class EnemyAI : MonoBehaviour
             ChangeState(EnemyState.Materialized);
         }
     }
-
-    private bool HasArrivedToDestination()
-    {
-        bool changeLocation = false;
-        if (!_navmeshAgent.pathPending)
-        {
-            if (_navmeshAgent.remainingDistance <= _navmeshAgent.stoppingDistance)
-            {
-                if (!_navmeshAgent.hasPath || _navmeshAgent.velocity.sqrMagnitude == 0f)
-                    changeLocation = true;
-            }
-        }
-
-        return changeLocation;
-
-    }
-
+    
     private void InitializeScareState()
     {
         _canReceiveDamage = false;
@@ -251,7 +261,7 @@ public class EnemyAI : MonoBehaviour
 
         _onMaterializedTimer += Time.deltaTime;
 
-        if (IsTimeToChangeMaterializedPosition())
+        if (HasArrivedToDestination())
         {
             Action_MoveToRandomPositionFarAwayFromPlayerInsideMovementArea();
           
@@ -265,10 +275,10 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private bool IsTimeToChangeMaterializedPosition()
-    {
-        return _onMaterializedTimer >= _onMaterializedPositionChangeTimer;
-    }
+    // private bool IsTimeToChangeMaterializedPosition()
+    // {
+    //     return _onMaterializedTimer >= _onMaterializedPositionChangeTimer;
+    // }
 
     private void InitializeMaterializeState()
     {
@@ -282,6 +292,7 @@ public class EnemyAI : MonoBehaviour
         if (!_isEscapingInitialized)
         {
             InitializeEscapingState();
+            _masksController.DestroyMask();
             Escape();
         }
 
@@ -316,7 +327,6 @@ public class EnemyAI : MonoBehaviour
     }
 
     #endregion
-
     #region Actions
 
     private void Action_MoveToRandomPositionInsideMovementArea()
@@ -339,30 +349,19 @@ public class EnemyAI : MonoBehaviour
         _navmeshAgent.SetDestination(position);
     }
 
-    #endregion
-
-    #region TestStates
-
-    [ContextMenu("Hide the Motherfucker")]
-    private void SetStateHIding()
+    private void Action_EnemyDeath()
     {
-        _currentState = EnemyState.Hiding;
-    }
-
-    [ContextMenu("Scare the Motherfucker")]
-    private void SetStateScared()
-    {
-        _currentState = EnemyState.Scared;
-    }
-
-    [ContextMenu("Materialize the Motherfucker")]
-    private void SetStateMaterialized()
-    {
-        _currentState = EnemyState.Materialized;
+        
     }
 
     #endregion
-
+    #region Public Methods
+    
+    public void SetEscapeReady()
+    {
+        _canEscape = true;
+    }
+    
     public void Damage(float pAmount)
     {
         if (!_canReceiveDamage) return;
@@ -370,6 +369,7 @@ public class EnemyAI : MonoBehaviour
         if (_currentHealth <= 0) return;
         
         _currentHealth -= pAmount;
+        OnHitRecieved.Invoke();
         Debug.Log($"Ouch -{pAmount}");
     }
 
@@ -408,7 +408,25 @@ public class EnemyAI : MonoBehaviour
     {
         _movementArea = pMovementArea;
     }
+    
 
+    #endregion
+    #region Private Methods
+    private bool HasArrivedToDestination()
+    {
+        bool changeLocation = false;
+        if (!_navmeshAgent.pathPending)
+        {
+            if (_navmeshAgent.remainingDistance <= _navmeshAgent.stoppingDistance)
+            {
+                if (!_navmeshAgent.hasPath || _navmeshAgent.velocity.sqrMagnitude == 0f)
+                    changeLocation = true;
+            }
+        }
+
+        return changeLocation;
+
+    }
     private void IncreaseCellPhoneFocusByFactor(float pFactor = 2f)
     {
         _currentScareLevel += Time.deltaTime * pFactor;
@@ -444,8 +462,31 @@ public class EnemyAI : MonoBehaviour
         _isEscapingInitialized = false;
     }
 
-    public void SetEscapeReady()
+
+
+    #endregion
+    #region TestStates
+
+    [ContextMenu("Hide the Motherfucker")]
+    private void SetStateHIding()
     {
-        _canEscape = true;
+        _currentState = EnemyState.Hiding;
+        OnStateChange.Invoke(_currentState);
     }
+
+    [ContextMenu("Scare the Motherfucker")]
+    private void SetStateScared()
+    {
+        _currentState = EnemyState.Scared;
+        OnStateChange.Invoke(_currentState);
+    }
+
+    [ContextMenu("Materialize the Motherfucker")]
+    private void SetStateMaterialized()
+    {
+        _currentState = EnemyState.Materialized;
+        OnStateChange.Invoke(_currentState);
+    }
+
+    #endregion
 }

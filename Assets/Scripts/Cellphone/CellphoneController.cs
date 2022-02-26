@@ -29,7 +29,7 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] Color _colorHigh, _colorMid, _colorLow, _colorNothing;
     [SerializeField] GameObject _cellPhoneLight;
     [SerializeField] Inventory _inventory;
-    EnemyAI _enemyAI;
+    EnemyAI _enemyAI; 
     GameObject _enemy;
     float _pingNoise;
     float _pingTime;
@@ -40,7 +40,7 @@ public class CellphoneController : MonoBehaviour
     {
         _enemy = GameObject.FindObjectOfType<EnemyAI>().gameObject;
         _enemyAI = _enemy?.GetComponent<EnemyAI>();
-        EnemyAI.OnEnemyScareChange += HandleScareChange;
+        EnemyAI.OnEnemyScareChange += HandleScareChange; 
     }
 
     void OnEnable()
@@ -55,8 +55,7 @@ public class CellphoneController : MonoBehaviour
         StopCoroutine(Detect());
     }
     void HandleScareChange(float scareAmount) 
-        => _enemyScare = scareAmount; 
-    
+        => _enemyScare = scareAmount;  
     private void DoDetectionEffect()
     {   
         _noiseScreen.material.SetFloat("_NoiseAmount", _distance / EnemyDistance() * _noiseAmount);
@@ -95,10 +94,9 @@ public class CellphoneController : MonoBehaviour
             try
             {
                 enemy = Physics.OverlapSphere(transform.position, _radius, _enemyLayer).FirstOrDefault(x => x.gameObject == _enemy)?.gameObject;
- 
+    
                 if(enemy)
-                { 
-                    DebugText.instance.text.text = ($"Angle to enemy: {AngleToEnemy()}");
+                {  
                     DoDetectionEffect(); 
                     if(AngleToEnemy() <= _detAngleHigh)   
                         _enemyAI.Scare();   
@@ -111,22 +109,16 @@ public class CellphoneController : MonoBehaviour
                     _detector.color = AngleToEnemy() >= _detAngleLow ? _colorLow :
                                       AngleToEnemy() >= _detAngleHigh ? _colorMid : 
                                       AngleToEnemy() <= _detAngleHigh ? _colorHigh : _colorNothing;
-                                      
-                    // Aca cambio a escopeta cuando materializa enemigo
-                    // if(_enemyAI.Materialized)
-                    //     _inventory.ChangeInventory(1);
-
+                                       
+                    if(_enemyScare <= 100f && Input.GetButtonDown("Fire1"))
+                         _enemyAI.Materialize(); 
                 }
                 else
                 {
                     _scareAmt.text = ""; 
                     _enemyCloseness.text = "...No ghost";
                     _detector.color = _colorNothing;
-                    _noiseScreen.material.SetFloat("_NoiseAmount", 0f);
-
-                    // Aca vuelvo al telefono
-                    // if(_enemyAI.Materialized)
-                    //     _inventory.ChangeInventory(0);
+                    _noiseScreen.material.SetFloat("_NoiseAmount", 0f); 
 
                     ResetPingTimer();
                 } 

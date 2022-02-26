@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
   
     void Start()
     { 
+        EnemyAI.OnStateChange += HandleEnemyStateChange;
         _currentIem = 0;
     }
     void Update()
@@ -20,6 +21,21 @@ public class Inventory : MonoBehaviour
         else if(Input.GetButtonDown("SwitchWeaponDown"))
             ChangeInventory(-1);
 
+    }
+
+    void HandleEnemyStateChange(EnemyState state)
+    {
+        switch(state)
+        {
+            case EnemyState.Materialized: 
+                if(_currentIem != 1)
+                    ChangeInventory(1); 
+                break;
+            default: 
+                if (_currentIem != 0)
+                    ChangeInventory(0); 
+                break;
+        }
     }
     
     void ChangeInventory(int i)
