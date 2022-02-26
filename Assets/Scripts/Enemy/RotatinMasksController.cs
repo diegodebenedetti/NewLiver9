@@ -1,22 +1,25 @@
-
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RotatinMasksController : MonoBehaviour
 {
     [SerializeField]
     private Transform _head;
 
+    [FormerlySerializedAs("_maskPrefab")]
     [SerializeField]
-    private RotatingMask _maskPrefab;
+    private RotatingMask _flotatingMask;
+
+    [SerializeField]
+    private GameObject _maskWithPhysics;
 
     private Queue<RotatingMask> _masks = new();
 
     [ContextMenu("Spawn")]
     public void SpawnMask(float pRotationSpeed)
     {
-        var maskInstance = Instantiate(_maskPrefab);
+        var maskInstance = Instantiate(_flotatingMask);
         maskInstance.transform.position = _head.transform.position;
         maskInstance.SetCenter(_head);
         maskInstance.SetSpeed(pRotationSpeed);
@@ -34,10 +37,7 @@ public class RotatinMasksController : MonoBehaviour
         maskOnScene.gameObject.SetActive(false);
         Destroy(maskOnScene);
 
-        var maskWithRb = Instantiate(_maskPrefab,maskOnScene.transform.position, maskOnScene.transform.rotation);
-        maskWithRb.SetMovementEnabled(false);
-        maskWithRb.SetEnableMasks(true);
-        maskWithRb.gameObject.AddComponent<Rigidbody>();
+        Instantiate(_maskWithPhysics,maskOnScene.transform.position, maskOnScene.transform.rotation);
 
     }
 }
