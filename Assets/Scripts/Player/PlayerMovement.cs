@@ -11,17 +11,24 @@ public class PlayerMovement : MonoBehaviour
     
     CameraController _camCont;
     Vector3 _dir;
+    private bool _canMove;
+
     void Start()
     {
         if (!_rb) _rb = GetComponent<Rigidbody>();
         if (!_camCont) _camCont = GetComponentInChildren<CameraController>();
+        tutorial_helper_method.OnTutorialEnded += OnTutorialEnded;
     }
+
+    private void OnTutorialEnded()
+    {
+        _canMove = true;
+    }
+
     void Update()
     {
-        if(Input.GetButton("Run"))
-            Movement(_sprintSpeed);
-        else
-            Movement(_walkSpeed);
+        if(!_canMove) return;
+        Movement(_walkSpeed);
     }
 
     void Movement(float speed)

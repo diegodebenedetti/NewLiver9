@@ -57,9 +57,17 @@ public class CellphoneController : MonoBehaviour
                 _shakeAmplitude = 0;
                 _shakeTime = 0;
                 _isEnemyDead = true;
-                
+                StartCoroutine(AltFFourToExit());
+
                 break;
         }
+    }
+
+    private IEnumerator AltFFourToExit()
+    {
+        yield return new WaitForSeconds(13f);
+        _materializeText.GetComponent<TextMeshProUGUI>().SetText("ALT + F4 to exit");
+        _materializeText.SetActive(true);
     }
 
     void OnEnable()

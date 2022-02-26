@@ -9,12 +9,20 @@ public class CameraController : MonoBehaviour
     [SerializeField] AudioController _audioController;
     float _xRot, _yRot, x, y;
     bool _bobUp, _bobleft, _mouseEnable;
+    private bool _canMove;
     public Transform Pivot => _pivot;
     void Start()
     {
         _mouseEnable = false;
+        tutorial_helper_method.OnTutorialEnded += OnTutorialEnded;
+    }
+
+    private void OnTutorialEnded()
+    {
+        _canMove = true;
         SetMouse();
     }
+
     void Update()
     {  
          if(Input.GetKeyDown(KeyCode.Escape))
@@ -32,6 +40,7 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!_canMove) return;
         moveCamera();
     }
     void moveCamera()

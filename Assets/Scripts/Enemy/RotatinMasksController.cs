@@ -59,7 +59,7 @@ public class RotatinMasksController : MonoBehaviour
     {
         var maskRbInstance = Instantiate(_mainRbMask, _head.transform);
         _mainMask.SetActive(false);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
         maskRbInstance.GetComponent<Rigidbody>().isKinematic = false;
         maskRbInstance.GetComponent<BoxCollider>().enabled = true;
 
