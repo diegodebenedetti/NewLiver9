@@ -104,7 +104,8 @@ public class EnemyAI : MonoBehaviour
     //Dead
     private bool _isDead;
     private float _currentHealth;
-   
+    private bool _isDeadInitialized;
+
 
 
     private void Awake()
@@ -132,11 +133,11 @@ public class EnemyAI : MonoBehaviour
         {
             if (i % 2 == 0)
             {
-                _masksController.SpawnMask(100);
+                _masksController.SpawnRotatingMask(100);
             }
             else
             {
-                _masksController.SpawnMask(-100);
+                _masksController.SpawnRotatingMask(-100);
             }
         }
     }
@@ -274,12 +275,6 @@ public class EnemyAI : MonoBehaviour
             
         }
     }
-
-    // private bool IsTimeToChangeMaterializedPosition()
-    // {
-    //     return _onMaterializedTimer >= _onMaterializedPositionChangeTimer;
-    // }
-
     private void InitializeMaterializeState()
     {
         _enemyModel.SetActive(true);
@@ -321,9 +316,22 @@ public class EnemyAI : MonoBehaviour
     
     private void OnDead()
     {
-        _enemyModel.SetActive(true);
+        if (!_isDeadInitialized)
+        {
+            InitializeDeadState();
+            _masksController.MainMaskFinale();
+        }
+        
+    }
+    
+    private void InitializeDeadState()
+    {
+        _isDeadInitialized = true;
         _canReceiveDamage = false;
-        //Dead Animation
+        _navmeshAgent.speed = 0;
+        _navmeshAgent.isStopped = true;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+
     }
 
     #endregion

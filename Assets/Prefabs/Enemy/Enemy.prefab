@@ -335,7 +335,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3515300277706680910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.58, z: 0}
+  m_LocalPosition: {x: 0, y: 5.464, z: 0.397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1054,6 +1054,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d145a1aa6288c5745aa7f510e442b9dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainMask: {fileID: 7875449426508580192}
+  _mainRbMask: {fileID: 4344796285065403191, guid: a7b5b0b22558fe6438d3c48daf8dd661, type: 3}
   _head: {fileID: 8858076793161975092}
   _flotatingMask: {fileID: 814786916782564495, guid: d1385bcfa7f8da842b9805d6229d9c2c, type: 3}
   _maskWithPhysics: {fileID: 814786916782564500, guid: c908e229dfb1901408e66aeffd112533, type: 3}
@@ -1071,7 +1073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bodyMaterial: {fileID: 2100000, guid: d1bccdcc07773aa47946f1636060adeb, type: 2}
   _maskMaterial: {fileID: 2100000, guid: c404ca6b00f190b4084a9f24dfbcc2f0, type: 2}
-  _dissolveSpeed: 5.5
+  _dissolveSpeed: 4
 --- !u!1 &9220846011235359238
 GameObject:
   m_ObjectHideFlags: 0

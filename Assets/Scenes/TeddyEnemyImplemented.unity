@@ -1860,14 +1860,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2315912709888337323, guid: be7668c563513a541812b68c12703cfc, type: 3}
-      propertyPath: _maskWithPhysics
-      value: 
-      objectReference: {fileID: 814786916782564500, guid: c908e229dfb1901408e66aeffd112533, type: 3}
-    - target: {fileID: 7363852713725867135, guid: be7668c563513a541812b68c12703cfc, type: 3}
-      propertyPath: _dissolveSpeed
-      value: 5.5
-      objectReference: {fileID: 0}
     - target: {fileID: 9071020710756222593, guid: be7668c563513a541812b68c12703cfc, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -1920,14 +1912,6 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 4825543306289923871}
-    - target: {fileID: 9071020710756222607, guid: be7668c563513a541812b68c12703cfc, type: 3}
-      propertyPath: _onEscapeMovementSpeed
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 9071020710756222607, guid: be7668c563513a541812b68c12703cfc, type: 3}
-      propertyPath: _onMaterializeddMovementSpeed
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be7668c563513a541812b68c12703cfc, type: 3}
 --- !u!114 &714714745 stripped
