@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     private GameObject _muzzleFlashLight;
     [SerializeField] GameObject _projectile;
     [SerializeField] Transform _shootPoint;
-    [SerializeField] float _pellets, _spread,_rateOfFire, _shakeTime, _shakeAmplitude;
+    [SerializeField] float _pellets, _spread,_rateOfFire, _shakeTime, _shakeAmplitude, _shakeOnEnemyAmplitude;
     [SerializeField] UnityEvent _shootEvent;
     [SerializeField] Vector3 _shakeDirection;
     private CameraController _cameraController;
@@ -28,6 +28,7 @@ public class Weapon : MonoBehaviour
 
     private void CheckIfCanShoot()
     {
+        _cameraController.Shake(_shakeTime, _shakeDirection, _shakeOnEnemyAmplitude);
         if (_currentRate < _rateOfFire)
             _currentRate += Time.deltaTime;
         else

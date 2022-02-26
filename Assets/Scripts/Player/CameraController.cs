@@ -47,6 +47,7 @@ public class CameraController : MonoBehaviour
 
     internal void Shake(float time, Vector3 direction, float amplitude)
     {
+        StopAllCoroutines();
         StartCoroutine(AnimationCam(time,direction,amplitude));
     }
 

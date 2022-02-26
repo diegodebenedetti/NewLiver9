@@ -21,45 +21,44 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] float _pingTimeMax;
     [SerializeField] float _pingTimeMin;
     [SerializeField] float _noiseAmount; 
-    
+    [Header("Cellphone shake")]
+    [SerializeField] Vector3 _shakeDirection;
+    [SerializeField] float _shakeTime, _shakeAmplitude;
+
     [Header("UI")]
     [SerializeField] Image _detector;
     [SerializeField] Image _noiseScreen;
     [SerializeField] TextMeshProUGUI _scareAmt, _enemyCloseness; 
     [SerializeField] Color _colorHigh, _colorMid, _colorLow, _colorNothing;
-    [SerializeField] GameObject _cellPhoneLight;
+    [SerializeField] LightEffect _cellPhoneLight;
     [SerializeField] Inventory _inventory;
     EnemyAI _enemyAI; 
     GameObject _enemy;
-    float _pingNoise;
-    float _pingTime;
-    float _pingTimer;
-    float _enemyScare;
+    CameraController _cameraController;
+    float _pingNoise, _pingTime, _pingTimer, _enemyScare;
     RaycastHit _hit;
     void Start()
     {
         _enemy = GameObject.FindObjectOfType<EnemyAI>().gameObject;
         _enemyAI = _enemy?.GetComponent<EnemyAI>();
+        _cameraController = GetComponentInParent<CameraController>();
         EnemyAI.OnEnemyScareChange += HandleScareChange; 
     }
-
+ 
     void OnEnable()
     { 
-        _cellPhoneLight.SetActive(true);
+        _cellPhoneLight.gameObject.SetActive(true);
         StartCoroutine(Detect());
     }
 
-    void OnDisable() 
-    { 
-        _cellPhoneLight.SetActive(false);
-        StopCoroutine(Detect());
-    }
+    void OnDisable() => StopCoroutine(Detect());
     void HandleScareChange(float scareAmount) 
         => _enemyScare = scareAmount;  
     private void DoDetectionEffect()
     {   
         _noiseScreen.material.SetFloat("_NoiseAmount", _distance / EnemyDistance() * _noiseAmount);
-        PerformPingNoise(); 
+        PerformPingNoise();
+        ShakeCamera(); 
     }
 
     private void PerformPingNoise()
@@ -82,7 +81,8 @@ public class CellphoneController : MonoBehaviour
         _pingNoise = 0f;
         _pingTime = 0f;
         _pingTimer = 0f;
-    } 
+    }
+    void ShakeCamera() => _cameraController.Shake(_shakeTime, _shakeDirection, _shakeAmplitude * _enemyScare / 100f);
     float EnemyDistance() => Vector3.Distance(transform.position, _enemyAI.transform.position);
     Vector3 EnemyDirection() => _enemyAI.transform.position - _detectionPoint.position;
     float AngleToEnemy() => Vector3.Angle(new Vector3(EnemyDirection().x, 0, EnemyDirection().z),new Vector3(_detectionPoint.forward.x,0, _detectionPoint.forward.z));
@@ -110,8 +110,14 @@ public class CellphoneController : MonoBehaviour
                                       AngleToEnemy() >= _detAngleHigh ? _colorMid : 
                                       AngleToEnemy() <= _detAngleHigh ? _colorHigh : _colorNothing;
                                        
+
                     if(_enemyScare <= 100f && Input.GetButtonDown("Fire1"))
-                         _enemyAI.Materialize(); 
+                    {
+                        _cellPhoneLight.DoFlash();
+                        _enemyAI.Materialize(); 
+                    }
+
+
                 }
                 else
                 {
