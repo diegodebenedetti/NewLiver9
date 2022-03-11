@@ -12,8 +12,11 @@ public class tutorial_helper_method : MonoBehaviour
     public GameObject handWithPhone;
     public GameObject popup_phone_tutorial;
    public GameObject popup_neighborhood_message;
+    public TypeLetterByLetterFX popup_neighborhood_message_type_FX;
     public GameObject press_left_click_to_fire_msg;
-   
+    public GameObject panel_fadetoblack_homescreen;
+    private CanvasGroup panel_canvasgroup_fadetoblack_homescreen;
+    public GameObject image_homescreen;
     private bool _gameHasStarted;
     private bool _hasTutorialEnded;
     private bool _onIntroTutorial;
@@ -35,7 +38,10 @@ public class tutorial_helper_method : MonoBehaviour
     void Start()
     {
         currentState = TutorialStates.tutorialNotStarted;
-   
+        panel_canvasgroup_fadetoblack_homescreen = panel_fadetoblack_homescreen.GetComponent<CanvasGroup>();
+        
+
+
     }
 
     // Update is called once per frame
@@ -55,21 +61,49 @@ public class tutorial_helper_method : MonoBehaviour
         _gameHasStarted = true;
         _onIntroTutorial = true;
         AudioManager.Instance.Play("Ambient");
+        AudioManager.Instance.Play("startnewgamebell");
+
+
+
+        StartCoroutine(FadeToTutorial());
+
+
         StartCoroutine(tutorial());
     }
-    
+
+    IEnumerator FadeToTutorial() {
+        //fade to black
+        LeanTween.value(0f, 1f, 0.2f).setOnUpdate((float value) =>
+        {
+
+            panel_canvasgroup_fadetoblack_homescreen.alpha = value;
+        });
+
+        yield return new WaitForSeconds(1f);
+
+        LeanTween.value(1f, 0f, 0.3f).setOnUpdate((float value) =>
+        {
+
+            panel_canvasgroup_fadetoblack_homescreen.alpha = value;
+        });
+
+    }
     
 
     IEnumerator tutorial() {
 
         if (currentState == TutorialStates.tutorialNotStarted)
         {
+            yield return new WaitForSeconds(1f);
+            image_homescreen.SetActive(false);
             currentState = TutorialStates.IntroductionLetter;
             yield return new WaitForSeconds(0.8f);
             AudioManager.Instance.Play("timetogetthisjobdone");
             yield return new WaitForSeconds(2f);
             AudioManager.Instance.Play("swish");
             popup_neighborhood_message.SetActive(true);
+            popup_neighborhood_message_type_FX.startTypingMessage();
+
             currentState = TutorialStates.IntroductionLetterDone;
             yield return new WaitForSeconds(0.5f);
             _onIntroTutorial = false;
@@ -79,6 +113,7 @@ public class tutorial_helper_method : MonoBehaviour
             _onIntroTutorial = true;
             handWithLetter.SetActive(false);
             popup_neighborhood_message.SetActive(false);
+            AudioManager.Instance.Play("swish");
             yield return new WaitForSeconds(0.2f);
             handWithPhone.SetActive(true);
             yield return new WaitForSeconds(0.5f);
@@ -94,6 +129,7 @@ public class tutorial_helper_method : MonoBehaviour
         } else if (currentState == TutorialStates.showPhoneTutorialDone) {
             _onIntroTutorial = true;
             handWithPhone.SetActive(false);
+            AudioManager.Instance.Play("swish");
             popup_phone_tutorial.SetActive(false);
             yield return new WaitForSeconds(0.2f);
             handWithShotgun.SetActive(true);
