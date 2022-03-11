@@ -37,6 +37,26 @@ public class AudioManager : Singleton<AudioManager>
         }
         
     }
+
+    public void PlayOneShot(string name,bool randomVolume,float randomVolumeMin,float randomVolumeMax)
+    {
+        Sound snd = Array.Find(sounds, sound => sound.name == name);
+        try
+        {
+            if (randomVolume)
+            {
+                snd.volume = UnityEngine.Random.Range(randomVolumeMin, randomVolumeMax);
+            }
+            snd.source.PlayOneShot(snd.clip);
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("sound not found");
+        }
+
+    }
+
+
     public void Stop(string name)
     {
         Sound snd = Array.Find(sounds, sound => sound.name == name);
