@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Collections; 
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -74,11 +73,8 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-             if(transform.localPosition.y <= _minHeadBobY)
-             {
-                _bobUp = true;
-                _audioController.PlaySound(1f); 
-             }
+             if(transform.localPosition.y <= _minHeadBobY) 
+                _bobUp = true;   
             else
                 y = transform.localPosition.y - Time.deltaTime * _headBobbingSpeed;
         }
