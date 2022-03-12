@@ -43,6 +43,8 @@ namespace Enemy
         [SerializeField]
         private float _materializeThreshold;
 
+        public float MaterializeThreshold => _materializeThreshold;
+
         [SerializeField] 
         private float _onMaterializedPositionChangeTimer;
 
