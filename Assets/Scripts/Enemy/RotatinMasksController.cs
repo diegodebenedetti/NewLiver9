@@ -63,7 +63,5 @@ public class RotatinMasksController : MonoBehaviour
         maskRbInstance.GetComponent<Rigidbody>().isKinematic = false;
         maskRbInstance.GetComponent<BoxCollider>().enabled = true;
 
-
-
     }
 }

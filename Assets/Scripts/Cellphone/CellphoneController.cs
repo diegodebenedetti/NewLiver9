@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using Enemy;
 
 public class CellphoneController : MonoBehaviour
 { 
@@ -126,9 +127,9 @@ public class CellphoneController : MonoBehaviour
                     DoDetectionEffect(); 
                     if(AngleToEnemy() <= _detAngleHigh)  
                     {
-                        _enemyAI.Scare(); 
+                        _enemyAI.IncreaseMaterializeFactor(); 
 
-                        if(_enemyScare >= 98f )
+                        if(_enemyScare >= _enemyAI.MaterializeThreshold )
                         {
                             _materializeText.SetActive(true);
                             if(Input.GetButtonDown("Fire1"))
