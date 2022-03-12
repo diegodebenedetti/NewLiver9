@@ -14,11 +14,25 @@ public class OnMaterializeFX : MonoBehaviour
 
     private void OnStateChange(EnemyState pState)
     {
-
-        if (pState==EnemyState.Materialized)
+        switch (pState)
         {
-            Debug.Log("materialized alan");
+            case EnemyState.Hiding:
+                break;
+            case EnemyState.Scared:
+                break;
+            case EnemyState.Materialized:
+                //AudioManager.Instance.Play("monsterMaterialize");
+                Debug.Log("materialized alan");
+
+                break;
+            case EnemyState.Escaping:
+                break;
+            case EnemyState.Dead:
+                break;
+            default:
+                break;
         }
+       
     }
         // Update is called once per frame
         void Update()
