@@ -149,7 +149,7 @@ public class tutorial_helper_method : MonoBehaviour
             _onIntroTutorial = false;
         } else if (currentState==TutorialStates.shotgunTutorialWaitForFire && Input.GetMouseButtonDown(0)) {
             _onIntroTutorial = true;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(.7f);
             press_left_click_to_fire_msg.SetActive(false);
             handWithShotgun.SetActive(false);
             yield return new WaitForSeconds(0.2f);

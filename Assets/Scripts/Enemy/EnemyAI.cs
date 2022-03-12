@@ -259,7 +259,7 @@ public class EnemyAI : MonoBehaviour
         if (!_isMaterializedInitialized)
         {
             InitializeMaterializeState();
-            AudioManager.Instance.Play("monsterMaterialize");
+           
         }
 
         _onMaterializedTimer += Time.deltaTime;
@@ -281,6 +281,7 @@ public class EnemyAI : MonoBehaviour
     {
         _enemyModel.SetActive(true);
         _canReceiveDamage = true;
+        _isMaterializedInitialized = true;
         _navmeshAgent.speed = _onMaterializeddMovementSpeed;
     }
 
