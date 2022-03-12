@@ -13,6 +13,7 @@ public class LightEffect : MonoBehaviour
     [SerializeField] float _flashInstenity;
     [SerializeField] float _flashTime, _flashDiminshFactor;
     [SerializeField] UnityEvent _flashEvent;   
+    [SerializeField] Animator anim;
 
     Light _light;
     float _timer, _originalIntesity, _enemyScare;
@@ -44,7 +45,12 @@ public class LightEffect : MonoBehaviour
        
     }
 
-    public void DoFlash() => StartCoroutine(Flash());
+    public void DoFlash()
+    {
+        StartCoroutine(Flash());
+        _flashEvent.Invoke();
+        anim.SetTrigger("Shoot");
+    } 
     IEnumerator Flicker()
     {
 
@@ -62,18 +68,16 @@ public class LightEffect : MonoBehaviour
     IEnumerator Flash()
     {
         _doingFlash = true;
-        _flashEvent.Invoke();
         var timer = 0f;
         
         while(timer < _flashTime)
         {
             timer += Time.deltaTime;
-            _light.intensity = _flashInstenity - (timer/_flashDiminshFactor * _flashDiminshFactor);
+            _light.intensity = _flashInstenity - (_flashDiminshFactor * _flashDiminshFactor/ timer);
             yield return null;
         }
         _light.intensity = _originalIntesity;
-        _doingFlash = false;
-        gameObject.SetActive(false);    
+        _doingFlash = false;  
 
     }
   

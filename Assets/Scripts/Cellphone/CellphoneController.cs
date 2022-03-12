@@ -13,7 +13,7 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] float _radius; 
     [SerializeField] float _detAngleHigh, _detAngleLow;
     [SerializeField] Transform _detectionPoint; 
-    [SerializeField] LayerMask _enemyLayer;
+    [SerializeField] LayerMask _enemyLayer; 
 
     [Header("Ping Noise")] 
     [SerializeField] AudioController _audioControl;
@@ -27,13 +27,9 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] float _shakeTime, _shakeAmplitude;
 
     [Header("UI")]
-    [SerializeField] Image _detector;
-    [SerializeField] Image _noiseScreen;
-    [SerializeField] TextMeshProUGUI _scareAmt, _enemyCloseness; 
-    [SerializeField] GameObject _materializeText;
-    [SerializeField] Color _colorHigh, _colorMid, _colorLow, _colorNothing;
-    [SerializeField] LightEffect _cellPhoneLight;
-    [SerializeField] Inventory _inventory;
+    [SerializeField] Transform _needle, _needlePivot;
+    [SerializeField] Image _noiseScreen;   
+    [SerializeField] LightEffect _cellPhoneLight; 
     EnemyAI _enemyAI; 
     GameObject _enemy;
     CameraController _cameraController;
@@ -63,12 +59,21 @@ public class CellphoneController : MonoBehaviour
                 break;
         }
     }
-
+    private void Update() 
+    { 
+        if(Input.GetButtonDown("Fire1"))
+        {
+            _cellPhoneLight.DoFlash();
+            if(_enemyScare >= _enemyAI.MaterializeThreshold)
+                _enemyAI.Materialize();  
+        } 
+        MoveNeedle(_enemyScare);
+    }
     private IEnumerator AltFFourToExit()
     {
         yield return new WaitForSeconds(13f);
-        _materializeText.GetComponent<TextMeshProUGUI>().SetText("ALT + F4 to exit");
-        _materializeText.SetActive(true);
+        // _materializeText.GetComponent<TextMeshProUGUI>().SetText("ALT + F4 to exit");
+        // _materializeText.SetActive(true);
     }
 
     void OnEnable()
@@ -77,7 +82,11 @@ public class CellphoneController : MonoBehaviour
         StartCoroutine(Detect());
     }
 
-    void OnDisable() => StopCoroutine(Detect());
+    void OnDisable()
+    {
+        _cellPhoneLight.gameObject.SetActive(false);
+        StopCoroutine(Detect());
+    }
     void HandleScareChange(float scareAmount) 
         => _enemyScare = scareAmount;  
     private void DoDetectionEffect()
@@ -90,8 +99,8 @@ public class CellphoneController : MonoBehaviour
 
     private void PerformPingNoise()
     {
-        _pingNoise =  Mathf.Clamp(_enemyScare /25f,  _pingNoiseMin, _pingNoiseMax) ;
-        _pingTime = Mathf.Clamp(25f/_enemyScare, _pingTimeMin, _pingTimeMax); 
+        _pingNoise =  Mathf.Clamp(Mathf.Abs(_enemyScare) /25f,  _pingNoiseMin, _pingNoiseMax) ;
+        _pingTime = Mathf.Clamp(25f/Mathf.Abs(_enemyScare), _pingTimeMin, _pingTimeMax); 
 
         if(_pingTimer < _pingTime)
         {
@@ -109,6 +118,7 @@ public class CellphoneController : MonoBehaviour
         _pingTime = 0f;
         _pingTimer = 0f;
     }
+    void MoveNeedle(float rotation) => _needlePivot.transform.localEulerAngles = new Vector3(0,0,-rotation); 
     void ShakeCamera() => _cameraController.Shake(_shakeTime, _shakeDirection, _shakeAmplitude * _enemyScare / 100f);
     float EnemyDistance() => Vector3.Distance(transform.position, _enemyAI.transform.position);
     Vector3 EnemyDirection() => _enemyAI.transform.position - _detectionPoint.position;
@@ -121,51 +131,21 @@ public class CellphoneController : MonoBehaviour
             try
             {
                 enemy = Physics.OverlapSphere(transform.position, _radius, _enemyLayer).FirstOrDefault(x => x.gameObject == _enemy)?.gameObject;
-    
+                
                 if(enemy)
                 {  
                     DoDetectionEffect(); 
-                    if(AngleToEnemy() <= _detAngleHigh)  
-                    {
-                        _enemyAI.IncreaseMaterializeFactor(); 
-
-                        if(_enemyScare >= _enemyAI.MaterializeThreshold )
-                        {
-                            _materializeText.SetActive(true);
-                            if(Input.GetButtonDown("Fire1"))
-                            {
-                                _cellPhoneLight.DoFlash();
-                                _enemyAI.Materialize();  
-                            }
-                        }
-                        else
-                        { 
-                            _materializeText.SetActive(false);
-                        }
-                         
-                    } 
-                    
-                    _scareAmt.text = $"{(int)_enemyScare}";
-                    _enemyCloseness.text = AngleToEnemy() >= _detAngleLow ? "Ghost near view" :
-                                      AngleToEnemy() >= _detAngleHigh ? "Ghost is close" : 
-                                      AngleToEnemy() <= _detAngleHigh ? "Ghost in view!" : "...No ghost";
-                                    
-                    _detector.color = AngleToEnemy() >= _detAngleLow ? _colorLow :
-                                      AngleToEnemy() >= _detAngleHigh ? _colorMid : 
-                                      AngleToEnemy() <= _detAngleHigh ? _colorHigh : _colorNothing;
-                                       
+                    Shake(); 
+                    if(AngleToEnemy() <= _detAngleHigh)   
+                        _enemyAI.IncreaseMaterializeFactor();  
 
                   
 
 
                 }
                 else
-                {
-                    _scareAmt.text = ""; 
-                    _enemyCloseness.text = "...No ghost";
-                    _detector.color = _colorNothing;
+                {  
                     _noiseScreen.material.SetFloat("_NoiseAmount", 0f); 
-
                     ResetPingTimer();
                 } 
             }
@@ -175,5 +155,14 @@ public class CellphoneController : MonoBehaviour
             } 
             yield return null; 
         }
+    }
+
+    void Shake()
+    {  
+        var origin = _needle.localPosition; 
+        var amplitude =  AngleToEnemy() <= _detAngleHigh ? 2 : AngleToEnemy() <= _detAngleLow ? 1 :  AngleToEnemy() >= _detAngleLow ? 0.5f : 0f;
+        var Random = UnityEngine.Random.insideUnitSphere * amplitude;
+        _needle.localPosition = origin + new Vector3(Random.x, 0);
+
     }
 }
