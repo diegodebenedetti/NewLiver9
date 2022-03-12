@@ -857,6 +857,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4825543305527771611, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _canMove
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4825543306024507868, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -900,6 +904,10 @@ PrefabInstance:
     - target: {fileID: 4825543306024507868, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825543306024507869, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _canMove
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4825543306024507870, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_Name
@@ -4295,6 +4303,7 @@ MonoBehaviour:
   _flashEvent:
     m_PersistentCalls:
       m_Calls: []
+  anim: {fileID: 0}
 --- !u!114 &1601718634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5346,6 +5355,7 @@ MonoBehaviour:
   _flashEvent:
     m_PersistentCalls:
       m_Calls: []
+  anim: {fileID: 0}
 --- !u!114 &1982969747
 MonoBehaviour:
   m_ObjectHideFlags: 0

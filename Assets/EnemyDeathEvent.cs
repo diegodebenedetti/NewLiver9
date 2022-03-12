@@ -7,8 +7,7 @@ public class EnemyDeathEvent : MonoBehaviour
     [SerializeField] Color _color;
     [SerializeField] float _sunIntesntiy, _time;
     [SerializeField] Material _newSkybox;
-
-    void Start() => EnemyAI.OnStateChange += Ending;
+ 
 
     void Ending(EnemyState state)
     {  
