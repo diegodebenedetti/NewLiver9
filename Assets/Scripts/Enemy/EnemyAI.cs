@@ -123,7 +123,7 @@ namespace Enemy
             }
         }
 
-        private void SendEventOfScareLevel() => OnEnemyScareChange.Invoke(_currentScareLevel);
+        private void SendEventOfScareLevel() => OnEnemyScareChange.Invoke(Mathf.Clamp(_currentScareLevel, 0 , 100));
 
         private void Update()
         {
@@ -357,7 +357,7 @@ namespace Enemy
             OnHitRecieved.Invoke();
         }
 
-        public void Scare()
+        public void IncreaseMaterializeFactor()
         {
             switch (_currentState)
             {
@@ -373,8 +373,8 @@ namespace Enemy
                     IncreaseCellPhoneFocusByFactor(15f);
                     if (_currentScareLevel >= _materializeThreshold)
                     {
-                        _currentScareLevel = _materializeThreshold;
-                        _readyForMaterialize = true;
+                        Mathf.Clamp(_currentScareLevel, 0, 100);
+                       _readyForMaterialize = true;
                     }
 
                     break;

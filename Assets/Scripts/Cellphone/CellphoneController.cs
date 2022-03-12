@@ -127,7 +127,7 @@ public class CellphoneController : MonoBehaviour
                     DoDetectionEffect(); 
                     if(AngleToEnemy() <= _detAngleHigh)  
                     {
-                        _enemyAI.Scare(); 
+                        _enemyAI.IncreaseMaterializeFactor(); 
 
                         if(_enemyScare >= 98f )
                         {
