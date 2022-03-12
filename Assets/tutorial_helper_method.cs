@@ -13,6 +13,7 @@ public class tutorial_helper_method : MonoBehaviour
     public GameObject popup_phone_tutorial;
    public GameObject popup_neighborhood_message;
     public TypeLetterByLetterFX popup_neighborhood_message_type_FX;
+    public TypeLetterByLetterFX popup_phone_tutorial_FX;
     public GameObject press_left_click_to_fire_msg;
     public GameObject panel_fadetoblack_homescreen;
     private CanvasGroup panel_canvasgroup_fadetoblack_homescreen;
@@ -58,6 +59,11 @@ public class tutorial_helper_method : MonoBehaviour
 
     public void SetGameHasStarted()
     {
+        if (_gameHasStarted)
+        {
+            return;
+        }
+
         _gameHasStarted = true;
         _onIntroTutorial = true;
         AudioManager.Instance.Play("Ambient");
@@ -121,6 +127,7 @@ public class tutorial_helper_method : MonoBehaviour
             handWithPhone.GetComponent<hand_with_phone>().pressPhoneButtonAnimation();
             yield return new WaitForSeconds(2f);
             popup_phone_tutorial.SetActive(true);
+            popup_phone_tutorial_FX.startTypingMessage();
             AudioManager.Instance.Play("swish");
             currentState = TutorialStates.showPhoneTutorialDone;
             yield return new WaitForSeconds(0.5f);
