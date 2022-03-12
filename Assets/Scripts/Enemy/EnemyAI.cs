@@ -21,13 +21,10 @@ namespace Enemy
         [Header("Health")] 
         [SerializeField] 
         private float _maxHealth = 100f;
-
-
+        
         [Header("On Hiding State")] 
         [SerializeField]
         private float _onHidingPositionChangeTimer;
-
-
 
         [Header("On Scared State")] 
         [SerializeField]
@@ -37,12 +34,10 @@ namespace Enemy
         private float _onScaredPositionChangeTimer;
         [SerializeField] 
         private float _runDistanceWhenScared;
-
-
+        
         [Header("On Materialized State")] 
         [SerializeField]
         private float _materializeThreshold;
-
         public float MaterializeThreshold => _materializeThreshold;
 
         [SerializeField] 
@@ -91,9 +86,7 @@ namespace Enemy
         private bool _isDead;
         private float _currentHealth;
         private bool _isDeadInitialized;
-
-
-
+        
         private void Awake()
         {
             _enemyMovementController = GetComponent<EnemyMovementController>();
@@ -108,24 +101,7 @@ namespace Enemy
             ChangeState(EnemyState.Hiding);
             SpawnMasks();
         }
-
-        private void SpawnMasks()
-        {
-
-            for (int i = 0; i < _escapeThresholds.Length - 1; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    _masksController.SpawnRotatingMask(100);
-                }
-                else
-                {
-                    _masksController.SpawnRotatingMask(-100);
-                }
-            }
-        }
-
-        private void SendEventOfScareLevel() => OnEnemyScareChange.Invoke(Mathf.Clamp(_currentScareLevel, 0 , 100));
+        
 
         private void Update()
         {
@@ -171,8 +147,8 @@ namespace Enemy
             }
         }
 
-
         #region StateCallbacks
+        
 
         private void OnHiding()
         {
@@ -265,7 +241,6 @@ namespace Enemy
             _enemyModel.SetActive(true);
             _canReceiveDamage = true;
         }
-
         private void OnEscaping()
         {
             if (!_isEscapingInitialized)
@@ -283,7 +258,6 @@ namespace Enemy
                 ChangeState(EnemyState.Hiding);
             }
         }
-
         private void InitializeEscapingState()
         {
             _canReceiveDamage = false;
@@ -291,13 +265,11 @@ namespace Enemy
             _currentHealth = 100;
 
         }
-
         private void Escape()
         {
             Vector3 escapeRoute = SpawnManager.Instance.GetEscapeRoute().position;
             _enemyMovementController.SetEnemyDestination(escapeRoute);
         }
-    
         private void OnDead()
         {
             if (!_isDeadInitialized)
@@ -307,7 +279,6 @@ namespace Enemy
             }
         
         }
-    
         private void InitializeDeadState()
         {
             _isDeadInitialized = true;
@@ -397,7 +368,7 @@ namespace Enemy
         
         #endregion
         #region Private Methods
-      
+        
         private void IncreaseCellPhoneFocusByFactor(float pFactor = 2f)
         {
             _currentScareLevel += Time.deltaTime * pFactor;
@@ -410,6 +381,8 @@ namespace Enemy
 
             _currentScareLevel -= Time.deltaTime;
         }
+        
+        private void SendEventOfScareLevel() => OnEnemyScareChange.Invoke(Mathf.Clamp(_currentScareLevel, 0 , 100));
 
         private void ChangeState(EnemyState pState)
         {
@@ -436,7 +409,21 @@ namespace Enemy
             _isEscapingInitialized = false;
         }
         
+        private void SpawnMasks()
+        {
 
+            for (int i = 0; i < _escapeThresholds.Length - 1; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    _masksController.SpawnRotatingMask(100);
+                }
+                else
+                {
+                    _masksController.SpawnRotatingMask(-100);
+                }
+            }
+        }
         #endregion
         #region TestStates
 
