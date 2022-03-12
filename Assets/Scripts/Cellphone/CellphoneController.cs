@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using Enemy;
 
 public class CellphoneController : MonoBehaviour
 { 

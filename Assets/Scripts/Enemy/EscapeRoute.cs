@@ -1,4 +1,5 @@
 
+using Enemy;
 using UnityEngine;
 
 public class EscapeRoute : MonoBehaviour

@@ -1,5 +1,6 @@
 
 using System;
+using Enemy;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -31,6 +32,8 @@ public class Bullet : MonoBehaviour
         
         if (enemy != null)
         {
+            if(enemy.CurrentState != EnemyState.Materialized) return;
+            
             enemy.Damage(1.5f);
             var contactPoint = collision.contacts[0];
             var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);

@@ -1,4 +1,5 @@
-using System.Collections; 
+using System.Collections;
+using Enemy;
 using UnityEngine;
 
 public class EnemyDeathEvent : MonoBehaviour
