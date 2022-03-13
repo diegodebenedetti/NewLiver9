@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Enemy
@@ -35,6 +36,10 @@ namespace Enemy
         [SerializeField] 
         private float _runDistanceWhenScared;
         
+        [Header("On Materializing State")]
+        [SerializeField]
+        private float _onMaterializingRoutineDuration;
+        
         [Header("On Materialized State")] 
         [SerializeField]
         private float _materializeThreshold;
@@ -50,6 +55,7 @@ namespace Enemy
 
         //Components
         private EnemyMovementController _enemyMovementController;
+        private EnemyAnimationController _enemyAnimationController;
         private EnemyState _currentState;
         public EnemyState CurrentState => _currentState;
         private Transform _playerTransform;
@@ -71,7 +77,11 @@ namespace Enemy
         private bool _canScare;
         private bool _isScaredInitialized;
         private float _onScaredTimer;
-
+        
+        //Materializing
+        private bool _isMaterializingInitialized;
+        private float _onMaterializingTimer;
+        
         //Materialized
         private bool _canMaterialize;
         private bool _readyForMaterialize;
@@ -90,6 +100,8 @@ namespace Enemy
         private void Awake()
         {
             _enemyMovementController = GetComponent<EnemyMovementController>();
+            _enemyAnimationController = GetComponent<EnemyAnimationController>();
+            
             _masksController = GetComponent<RotatinMasksController>(); ;
             _playerTransform = _player.transform;
             _escapeThresholdindex = 0;
@@ -141,11 +153,16 @@ namespace Enemy
                 case EnemyState.Dead:
                     OnDead();
                     break;
+                case EnemyState.Materializing:
+                    OnMaterializing();
+                    break;
                 default:
                     OnHiding();
                     break;
             }
         }
+
+      
 
         #region StateCallbacks
         
@@ -202,7 +219,7 @@ namespace Enemy
 
             if (_canMaterialize)
             {
-                ChangeState(EnemyState.Materialized);
+                ChangeState(EnemyState.Materializing);
             }
         }
     
@@ -211,13 +228,40 @@ namespace Enemy
             _canReceiveDamage = false;
             _isScaredInitialized = true;
         }
+        
+        private void OnMaterializing()
+        {
+            if (!_isMaterializingInitialized)
+            {
+                InitializeMaterializingState();
+            }
+
+            _onMaterializingTimer += Time.deltaTime;
+
+            if (_onMaterializingTimer >= _onMaterializingRoutineDuration)
+            {
+                _onMaterializingTimer = 0;
+                ChangeState(EnemyState.Materialized);
+            }
+
+        }
+
+        private void InitializeMaterializingState()
+        {
+            _isMaterializingInitialized = true;
+            _enemyModel.SetActive(true);
+            
+        }
 
         private void OnMaterialized()
         {
             if (!_isMaterializedInitialized)
             {
                 InitializeMaterializeState();
+                Vector3 seletedPosition = Action_SelectRandomPositionFarAwayFromPlayerInsideMovementArea();
+                _enemyMovementController.SetEnemyDestination(seletedPosition);
                 AudioManager.Instance.Play("monsterMaterialize");
+                
             }
 
             _onMaterializedTimer += Time.deltaTime;
@@ -236,8 +280,10 @@ namespace Enemy
             
             }
         }
+        
         private void InitializeMaterializeState()
         {
+            _isMaterializedInitialized = true;
             _enemyModel.SetActive(true);
             _canReceiveDamage = true;
         }
@@ -254,7 +300,7 @@ namespace Enemy
             if (_enemyMovementController.HasArrivedToDestination() || _canEscape)
             {
                 SpawnManager.Instance.SendEnemyToRandomSpawnLocation();
-                ResetPlayerState();
+                ResetEnemyState();
                 ChangeState(EnemyState.Hiding);
             }
         }
@@ -394,7 +440,7 @@ namespace Enemy
             Debug.Log(_currentState.ToString());
         }
 
-        private void ResetPlayerState()
+        private void ResetEnemyState()
         {
             _currentScareLevel = 0;
 
@@ -405,6 +451,7 @@ namespace Enemy
 
             _isHidingInitialized = false;
             _isScaredInitialized = false;
+            _isMaterializingInitialized = false;
             _isMaterializedInitialized = false;
             _isEscapingInitialized = false;
         }
@@ -430,22 +477,19 @@ namespace Enemy
         [ContextMenu("Hide the Motherfucker")]
         private void SetStateHIding()
         {
-            _currentState = EnemyState.Hiding;
-            OnStateChange.Invoke(_currentState);
+            ChangeState(EnemyState.Hiding);
         }
 
         [ContextMenu("Scare the Motherfucker")]
         private void SetStateScared()
         {
-            _currentState = EnemyState.Scared;
-            OnStateChange.Invoke(_currentState);
+           ChangeState(EnemyState.Scared);
         }
 
         [ContextMenu("Materialize the Motherfucker")]
         private void SetStateMaterialized()
         {
-            _currentState = EnemyState.Materialized;
-            OnStateChange.Invoke(_currentState);
+            ChangeState(EnemyState.Materializing);
         }
 
         #endregion

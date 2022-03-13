@@ -23,6 +23,7 @@ public class EnemyShaderController : MonoBehaviour
 
     private void Start()
     {
+        ResetDissolve();
         EnemyAI.OnStateChange += OnStateChange;
     }
 
@@ -30,17 +31,11 @@ public class EnemyShaderController : MonoBehaviour
     {
         switch (pEnemyState)
         {
-            case EnemyState.Hiding:
-                ResetDissolve();
-                break;
-            case EnemyState.Scared:
-                break;
-            case EnemyState.Materialized:
+            case EnemyState.Materializing:
+                StartCoroutine(Appear(_dissolveSpeed));
                 break;
             case EnemyState.Escaping:
                 StartCoroutine(Dissolve(_dissolveSpeed));
-                break;
-            case EnemyState.Dead:
                 break;
         }
     }
@@ -67,4 +62,17 @@ public class EnemyShaderController : MonoBehaviour
         
     }
 
+    private IEnumerator Appear(float pTime)
+    {
+        float time = 0;
+        float dissolveValue;
+        while (time <= pTime)
+        {
+            time += Time.deltaTime;
+            dissolveValue = Mathf.Lerp(1, 0, time / pTime);
+            _bodyMaterial.SetFloat(_dissolve, dissolveValue);
+            _maskMaterial.SetFloat(_dissolve, dissolveValue);
+            yield return null;
+        }
+    }
 }

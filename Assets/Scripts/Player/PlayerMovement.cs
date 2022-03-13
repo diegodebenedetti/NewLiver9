@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     CharacterController _ch;
     CameraController _camCont;
     Vector3 _dir;
-    private bool _canMove;
+    [SerializeField] private bool _canMove;
 
     void Start()
     {

@@ -890,6 +890,7 @@ MonoBehaviour:
   _scareThreshold: 30
   _onScaredPositionChangeTimer: 2
   _runDistanceWhenScared: 3
+  _onMaterializingRoutineDuration: 5
   _materializeThreshold: 100
   _onMaterializedPositionChangeTimer: 1
   _escapeThresholds: 460000003200000000000000

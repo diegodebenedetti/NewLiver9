@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] AudioController _audioController;
     float _xRot, _yRot, x, y;
     bool _bobUp, _bobleft, _mouseEnable;
-    private bool _canMove;
+    [SerializeField] private bool _canMove;
     public Transform Pivot => _pivot;
     void Start()
     {
