@@ -36,14 +36,13 @@ public class CellphoneController : MonoBehaviour
     float _pingNoise, _pingTime, _pingTimer, _enemyScare;
     Vector3 _needleOrignialPos;
     RaycastHit _hit;
-    private bool _isEnemyDead;
-
+    private bool _isEnemyDead; 
     void Start()
     {
         _enemy = GameObject.FindObjectOfType<EnemyAI>().gameObject;
         _enemyAI = _enemy?.GetComponent<EnemyAI>();
         _cameraController = GetComponentInParent<CameraController>();
-        _needleOrignialPos = _needlePivot.localPosition;
+        _needleOrignialPos = _needlePivot.localPosition; 
         EnemyAI.OnEnemyScareChange += HandleScareChange;
         EnemyAI.OnStateChange += OnStateChange;
     }
@@ -154,7 +153,7 @@ public class CellphoneController : MonoBehaviour
             yield return null; 
         }
     }
-
+ 
     void Shake()
     {  
         var forward = _needlePivot.forward;  

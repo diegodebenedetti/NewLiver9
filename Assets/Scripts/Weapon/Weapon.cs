@@ -30,11 +30,11 @@ public class Weapon : MonoBehaviour
     private CameraController _cameraController;
     private Animator _anim;
     private float _currentRate;
-    private bool _isEnemyDead;
+    private bool _isEnemyDead; 
 
     private void Awake()
     {
-        _anim = GetComponent<Animator>();
+        _anim = GetComponent<Animator>(); 
         _cameraController = GetComponentInParent<CameraController>();       
     }
 
@@ -98,13 +98,11 @@ public class Weapon : MonoBehaviour
         }
 
     }
-
+ 
     private IEnumerator MuzzleFlashLightCoroutine()
     {
         _muzzleFlashLight.SetActive(true);
         yield return new WaitForSeconds(0.15f);
-        _muzzleFlashLight.SetActive(false);
-
-
+        _muzzleFlashLight.SetActive(false); 
     }
 }

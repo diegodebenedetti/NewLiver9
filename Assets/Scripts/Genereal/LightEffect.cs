@@ -49,7 +49,7 @@ public class LightEffect : MonoBehaviour
     {
         StartCoroutine(Flash());
         _flashEvent.Invoke();
-        anim.SetTrigger("Shoot");
+        anim.SetTrigger("PressButton");
     } 
     IEnumerator Flicker()
     {
