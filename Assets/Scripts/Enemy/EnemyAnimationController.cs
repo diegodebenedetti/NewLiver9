@@ -33,6 +33,9 @@ public class EnemyAnimationController : MonoBehaviour
     {
         switch (pEnemyState)
         {
+            case  EnemyState.Materializing:
+                _anim.speed = 0;
+                break;
             case EnemyState.Materialized:
                 _anim.speed = 2;
                 break;
@@ -55,4 +58,8 @@ public class EnemyAnimationController : MonoBehaviour
         AudioManager.Instance.Play("monsterexplode");
     }
 
+    public void StopAnimations()
+    {
+        _anim.speed = 0;
+    }
 }

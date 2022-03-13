@@ -48,7 +48,11 @@ namespace Enemy
                 case EnemyState.Scared:
                     _navmeshAgent.speed = _runSpeedWhenScared;
                     break;
+                case EnemyState.Materializing:
+                    StopEnemyMovement();
+                    break;
                 case EnemyState.Materialized:
+                    _navmeshAgent.isStopped = false;
                     _navmeshAgent.speed = _runSpeedWhenMaterialized;
                     break;
                 case EnemyState.Escaping:
@@ -77,7 +81,7 @@ namespace Enemy
 
         }
         
-        private void StopEnemyMovement()
+        public void StopEnemyMovement()
         {
             _navmeshAgent.speed = 0;
             _navmeshAgent.isStopped = true;
