@@ -300,7 +300,7 @@ namespace Enemy
             if (_enemyMovementController.HasArrivedToDestination() || _canEscape)
             {
                 SpawnManager.Instance.SendEnemyToRandomSpawnLocation();
-                ResetPlayerState();
+                ResetEnemyState();
                 ChangeState(EnemyState.Hiding);
             }
         }
@@ -440,7 +440,7 @@ namespace Enemy
             Debug.Log(_currentState.ToString());
         }
 
-        private void ResetPlayerState()
+        private void ResetEnemyState()
         {
             _currentScareLevel = 0;
 
@@ -451,6 +451,7 @@ namespace Enemy
 
             _isHidingInitialized = false;
             _isScaredInitialized = false;
+            _isMaterializingInitialized = false;
             _isMaterializedInitialized = false;
             _isEscapingInitialized = false;
         }
