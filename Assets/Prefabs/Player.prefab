@@ -1626,6 +1626,10 @@ PrefabInstance:
       propertyPath: _detectionPoint
       value: 
       objectReference: {fileID: 5717862189586827878}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _needleTimeToReturn
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 192265040259084777, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -23.861076

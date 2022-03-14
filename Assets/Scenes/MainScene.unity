@@ -916,6 +916,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 9071020710756222593, guid: be7668c563513a541812b68c12703cfc, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 9071020710756222606, guid: be7668c563513a541812b68c12703cfc, type: 3}
       propertyPath: m_RootOrder
       value: 11

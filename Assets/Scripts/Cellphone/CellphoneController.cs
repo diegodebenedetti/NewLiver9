@@ -1,3 +1,6 @@
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks.Dataflow;
+using System.Transactions;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -34,10 +37,10 @@ public class CellphoneController : MonoBehaviour
     EnemyAI _enemyAI; 
     GameObject _enemy;
     CameraController _cameraController;
-    float _pingNoise, _pingTime, _pingTimer, _enemyScare;
-    Vector3 _needleOrignialPos;
-    RaycastHit _hit;
-    private bool _isEnemyDead; 
+    float _pingNoise, _pingTime, _pingTimer, _enemyScare, timer;
+    Vector3 _needleOrignialPos; 
+    Ray ray;
+    private bool _isEnemyDead, _isEnemyEscaping, _isEnemyInView, _isEnemyInsideRange; 
     void Start()
     {
         _enemy = GameObject.FindObjectOfType<EnemyAI>().gameObject;
@@ -57,7 +60,13 @@ public class CellphoneController : MonoBehaviour
                 _shakeTime = 0;
                 _isEnemyDead = true;
                 StartCoroutine(AltFFourToExit());
-
+                break;
+            case EnemyState.Hiding: 
+                _shakeAmplitude = 0;
+                _shakeTime = 0; 
+                timer = _needleTimeToReturn;
+                _isEnemyEscaping = true;
+                ResetNeedle();
                 break;
         }
     }
@@ -67,9 +76,8 @@ public class CellphoneController : MonoBehaviour
         {
             _cellPhoneLight.DoFlash();
             if(_enemyScare >= _enemyAI.MaterializeThreshold)
-                _enemyAI.Materialize();  
-        } 
-        MoveNeedle(_enemyScare);
+                _enemyAI.Materialize(); 
+        }
     }
     private IEnumerator AltFFourToExit()
     {
@@ -82,15 +90,30 @@ public class CellphoneController : MonoBehaviour
     { 
         _cellPhoneLight.gameObject.SetActive(true);
         StartCoroutine(Detect());
+        StartCoroutine(IsEnemyInFront());
     }
 
     void OnDisable()
     {
         _cellPhoneLight.gameObject.SetActive(false);
-        StopCoroutine(Detect());
+        StopAllCoroutines();
     }
     void HandleScareChange(float scareAmount) 
-        => _enemyScare = Mathf.Abs(scareAmount);  
+    { 
+        _enemyScare = Mathf.Abs(scareAmount); 
+        if(!_isEnemyEscaping)
+            MoveNeedle(_enemyScare);
+        else
+        {
+            if(timer > 0)
+            {
+                timer -= Time.deltaTime;
+                MoveNeedle(_needlePivot.localEulerAngles.z * timer/_needleTimeToReturn);
+            }
+            else   
+                _isEnemyEscaping = false;
+        }
+    }
     private void DoDetectionEffect()
     {   
         _noiseScreen.material.SetFloat("_NoiseAmount", _distance / EnemyDistance() * _noiseAmount);
@@ -119,7 +142,7 @@ public class CellphoneController : MonoBehaviour
         _pingNoise = 0f;
         _pingTime = 0f;
         _pingTimer = 0f;
-        ResetNeedlePosition();
+                 
     }
     void MoveNeedle(float rotation) => _needlePivot.localEulerAngles = new Vector3(0,0, 1.8f * -rotation); 
     void ShakeCamera() => _cameraController.Shake(_shakeTime, _shakeDirection, _shakeAmplitude * _enemyScare/_enemyAI.MaterializeThreshold);
@@ -137,17 +160,17 @@ public class CellphoneController : MonoBehaviour
     IEnumerator Detect()
     {
         while(true)
-        {
-            GameObject enemy;
+        { 
             try
             {
-                enemy = Physics.OverlapSphere(transform.position, _radius, _enemyLayer).FirstOrDefault(x => x.gameObject == _enemy)?.gameObject;
+                _isEnemyInsideRange = Physics.OverlapSphere(transform.position, _radius, _enemyLayer).FirstOrDefault(x => x.gameObject == _enemy)?.gameObject != null;
                 
-                if(enemy)
+
+                if(_isEnemyInsideRange)
                 {  
-                    DoDetectionEffect(); 
+                    DoDetectionEffect();  
                     Shake(); 
-                    if(AngleToEnemy() <= _detAngleHigh)   
+                    if(AngleToEnemy() <= _detAngleHigh && _isEnemyInView)   
                         _enemyAI.IncreaseMaterializeFactor();   
                 }
                 else
@@ -163,16 +186,25 @@ public class CellphoneController : MonoBehaviour
             yield return null; 
         }
     }
-    
-    IEnumerator ResetNeedlePosition()
+
+    IEnumerator IsEnemyInFront()
     {
-        var timer = _needleTimeToReturn;
-        while(timer > 0)
+        RaycastHit hit;
+        while(true)
         { 
-            MoveNeedle(_needlePivot.localEulerAngles.z * timer/_needleTimeToReturn);
-            timer -= Time.deltaTime;
-            yield return null;
-        }
+            for(float i = -_detAngleHigh; i < _detAngleHigh; i++)
+            {
+                var angle = ((_detectionPoint.forward * Mathf.Cos(i  * Mathf.Deg2Rad)) + _detectionPoint.right * Mathf.Sin(i  * Mathf.Deg2Rad)).normalized;
+                ray = new Ray(_detectionPoint.position, angle);
+                if(Physics.Raycast(_detectionPoint.position, angle, out hit, _distance) && hit.collider.CompareTag("Enemy"))
+                    _isEnemyInView = true;
+                else
+                    _isEnemyInView = false;
+                i += 1f; 
+            } 
+        yield return null;
+        } 
     }
- 
+
+    void OnDrawGizmos() => Gizmos.DrawRay(ray);
 }
