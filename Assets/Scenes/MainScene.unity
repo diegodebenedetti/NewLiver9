@@ -455,14 +455,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4825543306024507869, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: _walkSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4825543306024507869, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: _sprintSpeed
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 4825543306024507870, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2370,6 +2362,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1676942989278224325, guid: 7aa8bdefe471f4d428beb6ac602fa911, type: 3}
+      propertyPath: _time
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1676942989278224325, guid: 7aa8bdefe471f4d428beb6ac602fa911, type: 3}
       propertyPath: _sunLight
       value: 

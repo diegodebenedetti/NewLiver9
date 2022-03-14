@@ -7,9 +7,9 @@ public class EnemyDeathEvent : MonoBehaviour
     [SerializeField] Light _sunLight;
     [SerializeField] Color _color;
     [SerializeField] float _sunIntesntiy, _time;
-    [SerializeField] Material _newSkybox;
- 
+    [SerializeField] Material _newSkybox; 
 
+    void Start() => EnemyAI.OnStateChange += Ending;
     void Ending(EnemyState state)
     {  
         if(state == EnemyState.Dead)
@@ -30,7 +30,7 @@ public class EnemyDeathEvent : MonoBehaviour
         {
             timer += Time.deltaTime;
             _sunLight.intensity = _sunIntesntiy * timer/_time;
+            yield return null;
         }
-        yield return null;
     }
 }

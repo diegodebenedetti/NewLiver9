@@ -29,6 +29,7 @@ public class CellphoneController : MonoBehaviour
     [Header("UI")]
     [SerializeField] Transform _needlePivot;
     [SerializeField] Image _noiseScreen;   
+    [SerializeField] float _needleTimeToReturn;
     [SerializeField] LightEffect _cellPhoneLight; 
     EnemyAI _enemyAI; 
     GameObject _enemy;
@@ -113,17 +114,26 @@ public class CellphoneController : MonoBehaviour
             _audioControl.PlaySound(_pingNoise) ;
         }
     }
-    void ResetPingTimer()
+    void ResetNeedle()
     {
         _pingNoise = 0f;
         _pingTime = 0f;
         _pingTimer = 0f;
+        ResetNeedlePosition();
     }
     void MoveNeedle(float rotation) => _needlePivot.localEulerAngles = new Vector3(0,0, 1.8f * -rotation); 
     void ShakeCamera() => _cameraController.Shake(_shakeTime, _shakeDirection, _shakeAmplitude * _enemyScare/_enemyAI.MaterializeThreshold);
     float EnemyDistance() => Vector3.Distance(transform.position, _enemyAI.transform.position);
     Vector3 EnemyDirection() => _enemyAI.transform.position - _detectionPoint.position;
     float AngleToEnemy() => Vector3.Angle(new Vector3(EnemyDirection().x, 0, EnemyDirection().z),new Vector3(_detectionPoint.forward.x,0, _detectionPoint.forward.z));
+    
+    void Shake()
+    {  
+        var forward = _needlePivot.forward;  
+        var amplitude =  AngleToEnemy() <= _detAngleHigh ? 10 : AngleToEnemy() <= _detAngleLow ? 5 :  AngleToEnemy() >= _detAngleLow ? 0.5f : 0f;
+        var Random = UnityEngine.Random.Range(0.1f, 1f) * amplitude;
+        _needlePivot.localPosition = (_needleOrignialPos + (forward.normalized * Random)); 
+    }
     IEnumerator Detect()
     {
         while(true)
@@ -143,7 +153,7 @@ public class CellphoneController : MonoBehaviour
                 else
                 {  
                     _noiseScreen.material.SetFloat("_NoiseAmount", 0f); 
-                    ResetPingTimer();
+                    ResetNeedle();
                 } 
             }
             catch(Exception e)
@@ -153,13 +163,16 @@ public class CellphoneController : MonoBehaviour
             yield return null; 
         }
     }
- 
-    void Shake()
-    {  
-        var forward = _needlePivot.forward;  
-        var amplitude =  AngleToEnemy() <= _detAngleHigh ? 10 : AngleToEnemy() <= _detAngleLow ? 5 :  AngleToEnemy() >= _detAngleLow ? 0.5f : 0f;
-        var Random = UnityEngine.Random.Range(0.1f, 1f) * amplitude;
-        _needlePivot.localPosition = (_needleOrignialPos + (forward.normalized * Random)); 
-
+    
+    IEnumerator ResetNeedlePosition()
+    {
+        var timer = _needleTimeToReturn;
+        while(timer > 0)
+        { 
+            MoveNeedle(_needlePivot.localEulerAngles.z * timer/_needleTimeToReturn);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
     }
+ 
 }
