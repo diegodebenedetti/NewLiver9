@@ -1,32 +1,11 @@
 fileFormatVersion: 2
-guid: 71ebffbb9b8631b47a9f4f468059c9db
+guid: e666a4dd6371b2c47b4eb28f551b1a14
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
-      74: -1062688801490629015
-    second: enemymask_rig|enemy_recieve_hit
-  - first:
-      74: -3185932757034223093
-    second: enemymask_rig|mask_idle
-  - first:
-      74: -6738198369881849408
-    second: enemymask_rig|materialized
-  - first:
-      74: 7480778738823527857
-    second: enemymask_rig|materialized.001
-  - first:
-      74: -4775623375738605466
-    second: enemymask_rig|materialized.002
-  - first:
-      74: 8234634757081571288
-    second: monsterrig|Enemy_WalkAnimationm
-  - first:
-      74: 752576078649397901
-    second: monsterrig|Enemy_Walk1
-  - first:
-      74: -7225586809132133398
-    second: monsterrig|asd
+      74: -4398732207800752559
+    second: monster_rig|MonsterRig_WalkAnimation
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -48,7 +27,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 0
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -57,8 +36,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: monsterrig|Enemy_Walk1
-      takeName: monsterrig|Enemy_Walk1
+      name: monster_rig|MonsterRig_WalkAnimation
+      takeName: monster_rig|MonsterRig_WalkAnimation
       internalID: 0
       firstFrame: 0
       lastFrame: 99
@@ -69,35 +48,6 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: monsterrig|asd
-      takeName: monsterrig|asd
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 99
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
