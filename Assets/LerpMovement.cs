@@ -9,6 +9,6 @@ public class LerpMovement : MonoBehaviour
     
     void FixedUpdate()
     {        
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, _objective.rotation,_lerpPerc); 
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, _objective.localRotation,_lerpPerc); 
     }
 }

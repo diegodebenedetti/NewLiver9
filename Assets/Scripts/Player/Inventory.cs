@@ -9,18 +9,27 @@ public class Inventory : MonoBehaviour
     [SerializeField] Transform _itemPoint;
     [SerializeField] List<GameObject> _items = new List<GameObject>();
     int _currentIem;
+    bool _canSwitch; 
   
     void Start()
     { 
         EnemyAI.OnStateChange += HandleEnemyStateChange;
         _currentIem = 0;
+        _canSwitch = false;
+        tutorial_helper_method.OnTutorialEnded += OnTutorialEnded;
     }
+
+    
+    private void OnTutorialEnded() => _canSwitch = true;
     void Update()
     {  
-        if(Input.GetButtonDown("SwitchWeaponUp"))
-            ChangeInventory(1);
-        else if(Input.GetButtonDown("SwitchWeaponDown"))
-            ChangeInventory(-1);
+        if(_canSwitch)
+        {
+            if(Input.GetButtonDown("SwitchWeaponUp"))
+                ChangeInventory(1);
+            else if(Input.GetButtonDown("SwitchWeaponDown"))
+                ChangeInventory(-1); 
+        }
 
     }
 

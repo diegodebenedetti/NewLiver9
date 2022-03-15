@@ -7,6 +7,7 @@ public class tutorial_helper_method : MonoBehaviour
 {
     public static event Action OnTutorialEnded = delegate { };
     public TutorialStates currentState;
+    public bool DoTutorial;
     public GameObject handWithLetter;
     public GameObject handWithShotgun;
     public GameObject handWithPhone;
@@ -40,9 +41,6 @@ public class tutorial_helper_method : MonoBehaviour
     {
         currentState = TutorialStates.tutorialNotStarted;
         panel_canvasgroup_fadetoblack_homescreen = panel_fadetoblack_homescreen.GetComponent<CanvasGroup>();
-        
-
-
     }
 
     // Update is called once per frame
@@ -50,9 +48,13 @@ public class tutorial_helper_method : MonoBehaviour
     {
         if(!_gameHasStarted || _hasTutorialEnded) return;
         
-        if (Input.anyKeyDown && !_onIntroTutorial) {
-            StartCoroutine(tutorial());
-        }
+        if(DoTutorial)
+        { 
+            if (Input.anyKeyDown && !_onIntroTutorial) 
+                StartCoroutine(tutorial());
+        } 
+        else
+            OnTutorialEnded.Invoke(); 
         
     }
 
@@ -69,10 +71,7 @@ public class tutorial_helper_method : MonoBehaviour
         AudioManager.Instance.Play("Ambient");
         AudioManager.Instance.Play("startnewgamebell");
 
-
-
         StartCoroutine(FadeToTutorial());
-
 
         StartCoroutine(tutorial());
     }
@@ -80,16 +79,14 @@ public class tutorial_helper_method : MonoBehaviour
     IEnumerator FadeToTutorial() {
         //fade to black
         LeanTween.value(0f, 1f, 0.2f).setOnUpdate((float value) =>
-        {
-
+        { 
             panel_canvasgroup_fadetoblack_homescreen.alpha = value;
         });
 
         yield return new WaitForSeconds(1f);
 
         LeanTween.value(1f, 0f, 0.3f).setOnUpdate((float value) =>
-        {
-
+        { 
             panel_canvasgroup_fadetoblack_homescreen.alpha = value;
         });
 
