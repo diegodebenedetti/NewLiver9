@@ -460,6 +460,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5717862189097654863, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _distance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5717862189097654863, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: _detectionHeight
       value: 1.5
       objectReference: {fileID: 0}
