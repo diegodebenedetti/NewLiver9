@@ -22,9 +22,13 @@ public class OnMaterializeFX : MonoBehaviour
             case EnemyState.Scared:
                 break;
             case EnemyState.Materializing:
+                Debug.Log("Materializing");
+                    
                 enemyAnimator.SetTrigger("materializing");
                 break;
             case EnemyState.Materialized:
+                Debug.Log("Materialized");
+                enemyAnimator.SetTrigger("walking");
                 break;
             case EnemyState.Escaping:
                 break;
