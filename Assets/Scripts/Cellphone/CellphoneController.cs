@@ -13,10 +13,11 @@ public class CellphoneController : MonoBehaviour
 { 
     [Header("Cellphone detection")]
     [SerializeField] float _distance;
+    [SerializeField] float _detectionHeight;
     [SerializeField] float _radius; 
     [SerializeField] float _detAngleHigh, _detAngleLow;
     [SerializeField] Transform _detectionPoint; 
-    [SerializeField] LayerMask _enemyLayer; 
+    [SerializeField] LayerMask _layers; 
 
     [Header("Ping Noise")] 
     [SerializeField] AudioController _audioControl;
@@ -36,11 +37,12 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] LightEffect _cellPhoneLight; 
     EnemyAI _enemyAI; 
     GameObject _enemy;
+    RaycastHit _hit;
     CameraController _cameraController;
     float _pingNoise, _pingTime, _pingTimer, _enemyScare, timer;
     Vector3 _needleOrignialPos; 
     Ray ray;
-    private bool _isEnemyDead, _isEnemyEscaping, _isEnemyInView, _isEnemyInsideRange; 
+    private bool _isEnemyDead, _isEnemyEscaping, _isEnemyInsideRange; 
     void Start()
     {
         _enemy = GameObject.FindObjectOfType<EnemyAI>().gameObject;
@@ -89,8 +91,7 @@ public class CellphoneController : MonoBehaviour
     void OnEnable()
     { 
         _cellPhoneLight.gameObject.SetActive(true);
-        StartCoroutine(Detect());
-        StartCoroutine(IsEnemyInFront());
+        StartCoroutine(Detect()); 
     }
 
     void OnDisable()
@@ -163,14 +164,15 @@ public class CellphoneController : MonoBehaviour
         { 
             try
             {
-                _isEnemyInsideRange = Physics.OverlapSphere(transform.position, _radius, _enemyLayer).FirstOrDefault(x => x.gameObject == _enemy)?.gameObject != null;
+                _isEnemyInsideRange = Physics.OverlapSphere(transform.position, _radius, _layers).FirstOrDefault(x => x.gameObject == _enemy)?.gameObject != null;
                 
 
                 if(_isEnemyInsideRange)
                 {  
                     DoDetectionEffect();  
                     Shake(); 
-                    if(AngleToEnemy() <= _detAngleHigh && _isEnemyInView)   
+                    Debug.Log($"Thing hitting :{_hit.collider?.name}");
+                    if(AngleToEnemy() <= _detAngleHigh && IsEnemyInFront())   
                         _enemyAI.IncreaseMaterializeFactor();   
                 }
                 else
@@ -187,24 +189,7 @@ public class CellphoneController : MonoBehaviour
         }
     }
 
-    IEnumerator IsEnemyInFront()
-    {
-        RaycastHit hit;
-        while(true)
-        { 
-            for(float i = -_detAngleHigh; i < _detAngleHigh; i++)
-            {
-                var angle = ((_detectionPoint.forward * Mathf.Cos(i  * Mathf.Deg2Rad)) + _detectionPoint.right * Mathf.Sin(i  * Mathf.Deg2Rad)).normalized;
-                ray = new Ray(_detectionPoint.position, angle);
-                if(Physics.Raycast(_detectionPoint.position, angle, out hit, _distance) && hit.collider.CompareTag("Enemy"))
-                    _isEnemyInView = true;
-                else
-                    _isEnemyInView = false;
-                i += 1f; 
-            } 
-        yield return null;
-        } 
-    }
+    bool IsEnemyInFront() => Physics.Raycast(_detectionPoint.position, _enemy.transform.position - _detectionPoint.position + new Vector3(0, _detectionHeight), out _hit, _distance, _layers, QueryTriggerInteraction.Ignore) && _hit.collider.gameObject == _enemy;
 
-    void OnDrawGizmos() => Gizmos.DrawRay(ray);
+    void OnDrawGizmos() => Gizmos.DrawLine(_detectionPoint.position, _enemy.transform.position - _detectionPoint.position + new Vector3(0, _detectionHeight));
 }

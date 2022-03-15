@@ -1611,12 +1611,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 8938095274085659654}
     m_Modifications:
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _distance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _shakeTime
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _lerpNeedle
       value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _detAngleLow
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _detAngleHigh
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _layers.m_Bits
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _cellPhoneLight
@@ -1627,8 +1643,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5717862189586827878}
     - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _detectionHeight
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331177428, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _needleTimeToReturn
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818261501, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.568
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818261501, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.201
       objectReference: {fileID: 0}
     - target: {fileID: 192265040259084777, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
