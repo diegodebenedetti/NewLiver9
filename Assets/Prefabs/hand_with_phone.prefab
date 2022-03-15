@@ -2815,13 +2815,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _distance: 8
+  _detectionHeight: 0
   _radius: 20
   _detAngleHigh: 10
   _detAngleLow: 30
   _detectionPoint: {fileID: 1818261501}
-  _enemyLayer:
+  _layers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   _audioControl: {fileID: 522059837}
   _pingNoiseMax: 2
   _pingNoiseMin: 0.8
