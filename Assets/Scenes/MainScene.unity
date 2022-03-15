@@ -981,6 +981,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97fbe14952e4d44f9a647013efac9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &714714746 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6653343328868312343, guid: be7668c563513a541812b68c12703cfc, type: 3}
+  m_PrefabInstance: {fileID: 714714744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &746533545 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4840227298105620038, guid: 9e7e2e95b8e34e98b498527a1bf85a07, type: 3}
@@ -3072,6 +3077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b5938c022b5d946b23ec2e01b18c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyAnimator: {fileID: 714714746}
 --- !u!4 &1901661077
 Transform:
   m_ObjectHideFlags: 0

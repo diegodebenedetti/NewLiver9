@@ -6,6 +6,7 @@ using UnityEngine;
 public class OnMaterializeFX : MonoBehaviour
 {
     EnemyAI _enemyAI;
+    public Animator enemyAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +21,10 @@ public class OnMaterializeFX : MonoBehaviour
                 break;
             case EnemyState.Scared:
                 break;
+            case EnemyState.Materializing:
+                enemyAnimator.SetTrigger("materializing");
+                break;
             case EnemyState.Materialized:
-                //AudioManager.Instance.Play("monsterMaterialize");
-                Debug.Log("materialized alan");
-
                 break;
             case EnemyState.Escaping:
                 break;
@@ -32,7 +33,6 @@ public class OnMaterializeFX : MonoBehaviour
             default:
                 break;
         }
-       
     }
         // Update is called once per frame
         void Update()
