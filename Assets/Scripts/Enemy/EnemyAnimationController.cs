@@ -35,12 +35,18 @@ public class EnemyAnimationController : MonoBehaviour
         switch (pEnemyState)
         {
             case  EnemyState.Materializing:
-                _anim.speed = 0;
+                _anim.SetTrigger("materializing");
+                _anim.speed = 1.5f;
                 break;
             case EnemyState.Materialized:
+                AudioManager.Instance.Play("heartbeat");
+                AudioManager.Instance.Play("materializedAmbient");
+                _anim.SetTrigger("walking");
                 _anim.speed = 2;
                 break;
             case EnemyState.Escaping:
+                AudioManager.Instance.Stop("heartbeat");
+                AudioManager.Instance.Stop("materializedAmbient");
                 _anim.speed = 3;
                 break;
             case EnemyState.Dead:

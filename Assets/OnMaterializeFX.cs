@@ -20,24 +20,14 @@ public class OnMaterializeFX : MonoBehaviour
     {
         switch (pState)
         {
-            case EnemyState.Hiding:
-                break;
-            case EnemyState.Scared:
-                break;
-            case EnemyState.Materializing:
-                Debug.Log("Materializing");
-                    
-                enemyAnimator.SetTrigger("materializing");
-                break;
+            
             case EnemyState.Materialized:
                 Debug.Log("Materialized");
-                AudioManager.Instance.Play("heartbeat");
-                AudioManager.Instance.Play("materializedAmbient");
-                enemyAnimator.SetTrigger("walking");
+             
+              
                 break;
             case EnemyState.Escaping:
-                AudioManager.Instance.Stop("heartbeat");
-                AudioManager.Instance.Stop("materializedAmbient");
+             
                 break;
             case EnemyState.Dead:
                 break;
@@ -45,9 +35,5 @@ public class OnMaterializeFX : MonoBehaviour
                 break;
         }
     }
-        // Update is called once per frame
-        void Update()
-    {
-        
-    }
+ 
 }

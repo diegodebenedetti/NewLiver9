@@ -47,6 +47,12 @@ public class SpawnManager : Singleton<SpawnManager>
         return _bullets.Dequeue();
     }
 
+    public Vector3 GetRandomRoom()
+    {
+        var randomLocation = SelectRandomSpawnLocation();
+        return randomLocation.position;
+    }
+
     public void ReturnObjectToPool(Bullet pBulletObject)
     {
         pBulletObject.gameObject.transform.SetParent(_bulletsPool.transform);
