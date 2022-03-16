@@ -1475,6 +1475,17 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &980535826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 129403501, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+  m_PrefabInstance: {fileID: 276176577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &995351412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,6 +1608,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: bulletHitsMonster
     clip: {fileID: 8300000, guid: 60c294ba44e1b634aa9c56f92e268fe8, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: monster7
+    clip: {fileID: 8300000, guid: ccb4d6e202efb404797c5a923d7d1fd9, type: 3}
     volume: 0.7
     pitch: 1
     loop: 0
@@ -3214,6 +3231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAnimator: {fileID: 714714746}
+  volume: {fileID: 980535826}
 --- !u!4 &1901661077
 Transform:
   m_ObjectHideFlags: 0

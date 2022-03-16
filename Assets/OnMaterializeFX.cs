@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemy;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class OnMaterializeFX : MonoBehaviour
 {
     EnemyAI _enemyAI;
     public Animator enemyAnimator;
+    public Volume volume;
+    LensDistortion Distorsion;
     // Start is called before the first frame update
     void Start()
     {
+        volume.profile.TryGet(out Distorsion);
         EnemyAI.OnStateChange += OnStateChange;
         
     }
@@ -26,13 +31,21 @@ public class OnMaterializeFX : MonoBehaviour
                 break;
             case EnemyState.Materializing:
                 Debug.Log("Materializing");
-                    
+                AudioManager.Instance.Play("monster7");
                 enemyAnimator.SetTrigger("materializing");
+                AudioManager.Instance.Play("materializedAmbient");
+
+                LeanTween.value(0f, 0.5f, 1f).setOnUpdate((float val) =>
+                {
+                    Distorsion.intensity.value = val;
+                }).setEaseInOutSine().setLoopPingPong(3);
+
                 break;
             case EnemyState.Materialized:
                 Debug.Log("Materialized");
                 AudioManager.Instance.Play("heartbeat");
-                AudioManager.Instance.Play("materializedAmbient");
+              
+
                 enemyAnimator.SetTrigger("walking");
                 break;
             case EnemyState.Escaping:
@@ -45,6 +58,8 @@ public class OnMaterializeFX : MonoBehaviour
                 break;
         }
     }
+
+  
         // Update is called once per frame
         void Update()
     {
