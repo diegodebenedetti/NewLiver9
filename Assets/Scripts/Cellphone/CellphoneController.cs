@@ -190,6 +190,4 @@ public class CellphoneController : MonoBehaviour
     }
 
     bool IsEnemyInFront() => Physics.Raycast(_detectionPoint.position, _enemy.transform.position - _detectionPoint.position + new Vector3(0, _detectionHeight), out _hit, _distance, _layers, QueryTriggerInteraction.Ignore) && _hit.collider.gameObject == _enemy;
-
-    void OnDrawGizmos() => Gizmos.DrawLine(_detectionPoint.position, _enemy.transform.position - _detectionPoint.position + new Vector3(0, _detectionHeight));
-}
+ }
