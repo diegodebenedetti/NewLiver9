@@ -27,6 +27,7 @@ public class EnemyAnimationController : MonoBehaviour
     private void OnHitRecieved()
     {
         _anim.SetTrigger("enemy_recieve_hit");
+        AudioManager.Instance.Play("bulletHitsMonster");
     }
 
     private void OnStateChange(EnemyState pEnemyState)

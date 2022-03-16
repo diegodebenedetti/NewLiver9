@@ -6407,6 +6407,12 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: bulletHitsMonster
+    clip: {fileID: 8300000, guid: 60c294ba44e1b634aa9c56f92e268fe8, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &995351414
 Transform:
   m_ObjectHideFlags: 0
