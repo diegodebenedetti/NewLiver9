@@ -35,7 +35,7 @@ public class EnemyAnimationController : MonoBehaviour
         switch (pEnemyState)
         {
             case  EnemyState.Materializing:
-                _anim.speed = 0;
+                _anim.speed = 1.5f;
                 break;
             case EnemyState.Materialized:
                 _anim.speed = 2;

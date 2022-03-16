@@ -17,10 +17,13 @@ public class LightEffect : MonoBehaviour
 
     Light _light;
     float _timer, _originalIntesity, _enemyScare;
-    void Start() 
+    private void Awake() 
     { 
         EnemyAI.OnEnemyScareChange += EnemyScare;
         TryGetComponent<Light>(out _light);
+    }
+    void Start() 
+    { 
         _originalIntesity = _light.intensity;
         _timer = Random.Range(_minTime, _maxTime);
     }
