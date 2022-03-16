@@ -11,7 +11,10 @@ public class OnMaterializeFX : MonoBehaviour
     void Start()
     {
         EnemyAI.OnStateChange += OnStateChange;
+        
     }
+
+    
 
     private void OnStateChange(EnemyState pState)
     {
@@ -28,9 +31,13 @@ public class OnMaterializeFX : MonoBehaviour
                 break;
             case EnemyState.Materialized:
                 Debug.Log("Materialized");
+                AudioManager.Instance.Play("heartbeat");
+                AudioManager.Instance.Play("materializedAmbient");
                 enemyAnimator.SetTrigger("walking");
                 break;
             case EnemyState.Escaping:
+                AudioManager.Instance.Stop("heartbeat");
+                AudioManager.Instance.Stop("materializedAmbient");
                 break;
             case EnemyState.Dead:
                 break;
