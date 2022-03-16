@@ -6401,6 +6401,12 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: materializedAmbient
+    clip: {fileID: 8300000, guid: 79b29863cff5d4a438e634ba2eabe6f5, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!4 &995351414
 Transform:
   m_ObjectHideFlags: 0
