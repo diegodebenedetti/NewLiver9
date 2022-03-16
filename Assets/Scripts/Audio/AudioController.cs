@@ -26,4 +26,6 @@ public class AudioController : MonoBehaviour
         _source.pitch = Random.Range(_pitchMin, _pitchMax);
         _source.Play();
     }
+
+    public void ChangeList(List<AudioClip> audioClips) => _clips = audioClips != null? audioClips : _clips;
 }
