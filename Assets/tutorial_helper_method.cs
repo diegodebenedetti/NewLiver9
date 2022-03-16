@@ -61,10 +61,7 @@ public class tutorial_helper_method : MonoBehaviour
 
     public void SetGameHasStarted()
     {
-        if (_gameHasStarted)
-        {
-            return;
-        }
+        if (_gameHasStarted) return; 
 
         _gameHasStarted = true;
         _onIntroTutorial = true;
@@ -73,7 +70,17 @@ public class tutorial_helper_method : MonoBehaviour
 
         StartCoroutine(FadeToTutorial());
 
-        StartCoroutine(tutorial());
+        
+        if(DoTutorial) 
+        { 
+            StartCoroutine(tutorial());
+        }
+        else
+        { 
+            image_homescreen.SetActive(false); 
+            handWithLetter.SetActive(false);
+            handWithPhone.SetActive(true);
+        }
     }
 
     IEnumerator FadeToTutorial() {
