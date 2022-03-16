@@ -7,8 +7,6 @@ using UnityEngine.Rendering.Universal;
 
 public class OnMaterializeFX : MonoBehaviour
 {
-    EnemyAI _enemyAI;
-    public Animator enemyAnimator;
     public Volume volume;
     LensDistortion Distorsion;
     // Start is called before the first frame update
@@ -32,7 +30,6 @@ public class OnMaterializeFX : MonoBehaviour
             case EnemyState.Materializing:
                 Debug.Log("Materializing");
                 AudioManager.Instance.Play("monster7");
-                enemyAnimator.SetTrigger("materializing");
                 AudioManager.Instance.Play("materializedAmbient");
 
                 LeanTween.value(0f, 0.5f, 1f).setOnUpdate((float val) =>
@@ -46,7 +43,6 @@ public class OnMaterializeFX : MonoBehaviour
                 AudioManager.Instance.Play("heartbeat");
               
 
-                enemyAnimator.SetTrigger("walking");
                 break;
             case EnemyState.Escaping:
                 AudioManager.Instance.Stop("heartbeat");
@@ -60,9 +56,5 @@ public class OnMaterializeFX : MonoBehaviour
     }
 
   
-        // Update is called once per frame
-        void Update()
-    {
-        
-    }
+   
 }

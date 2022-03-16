@@ -42,6 +42,8 @@ namespace Enemy
         
         [Header("On Materialized State")] 
         [SerializeField]
+        private float _changeRoomThreshold;
+        [SerializeField]
         private float _materializeThreshold;
         public float MaterializeThreshold => _materializeThreshold;
 
@@ -87,6 +89,7 @@ namespace Enemy
         private bool _readyForMaterialize;
         private bool _isMaterializedInitialized;
         private float _onMaterializedTimer;
+        
 
         //Escape
         private bool _canEscape;
@@ -97,6 +100,7 @@ namespace Enemy
         private float _currentHealth;
         private bool _isDeadInitialized;
         
+
         private void Awake()
         {
             _enemyMovementController = GetComponent<EnemyMovementController>();
@@ -266,10 +270,23 @@ namespace Enemy
 
             _onMaterializedTimer += Time.deltaTime;
 
+           
             if (_enemyMovementController.HasArrivedToDestination())
             {
-                Vector3 seletedPosition = Action_SelectRandomPositionFarAwayFromPlayerInsideMovementArea();
-                _enemyMovementController.SetEnemyDestination(seletedPosition);
+                Vector3 seletedPosition = Vector3.zero;
+                
+                if (_onMaterializedTimer >= _changeRoomThreshold)
+                {
+                    _onMaterializedTimer = 0;
+                    seletedPosition = Action_ChangeRoom();
+                }
+                else
+                {
+                     seletedPosition = Action_SelectRandomPositionFarAwayFromPlayerInsideMovementArea();
+                    
+                }
+                
+                _enemyMovementController.SetEnemyDestination(seletedPosition);  
 
             }
 
@@ -355,7 +372,12 @@ namespace Enemy
 
             return position;
         }
-        
+
+        private Vector3 Action_ChangeRoom()
+        {
+            return SpawnManager.Instance.GetRandomRoom();
+        }
+
         #endregion
         #region Public Methods
     

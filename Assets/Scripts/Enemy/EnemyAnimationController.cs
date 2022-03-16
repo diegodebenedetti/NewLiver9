@@ -35,9 +35,11 @@ public class EnemyAnimationController : MonoBehaviour
         switch (pEnemyState)
         {
             case  EnemyState.Materializing:
+                _anim.SetTrigger("materializing");
                 _anim.speed = 1.5f;
                 break;
             case EnemyState.Materialized:
+                _anim.SetTrigger("walking");
                 _anim.speed = 2;
                 break;
             case EnemyState.Escaping:
