@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Floor/Stone
+  - Floor/Wood
+  - Floor/Dirt
+  - Floor/Tile
   layers:
   - Default
   - TransparentFX

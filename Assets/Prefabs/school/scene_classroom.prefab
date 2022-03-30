@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3847103133560458045}
   m_Layer: 0
   m_Name: Light_Ceiling1
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 8419536176051228305}
   m_Layer: 0
   m_Name: Curtains_Double.001
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 514254414683197399}
   m_Layer: 0
   m_Name: Plane.005
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 3064512567275800729}
   m_Layer: 0
   m_Name: Curtains_Double
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 1946327228592296154}
   m_Layer: 0
   m_Name: Plane.007
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 2188160132721960115}
   m_Layer: 0
   m_Name: Plane.002
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 8339908997642783691}
   m_Layer: 0
   m_Name: Plane.014
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -627,7 +627,7 @@ GameObject:
   - component: {fileID: 6620773248886963321}
   m_Layer: 0
   m_Name: Plane.012
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 6544464087571576372}
   m_Layer: 0
   m_Name: Plane.013
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -793,7 +793,7 @@ GameObject:
   - component: {fileID: 7278554405465052279}
   m_Layer: 0
   m_Name: Plane.004
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -877,7 +877,7 @@ GameObject:
   - component: {fileID: 8627417465660045010}
   m_Layer: 0
   m_Name: Plane.001
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -960,7 +960,7 @@ GameObject:
   - component: {fileID: 8747364771271515185}
   m_Layer: 0
   m_Name: Blackboard_01
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 5247190015281264025}
   m_Layer: 0
   m_Name: Plane.011
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1128,7 +1128,7 @@ GameObject:
   - component: {fileID: 6437435515511027984}
   m_Layer: 0
   m_Name: Plane.015
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1212,7 +1212,7 @@ GameObject:
   - component: {fileID: 7609718256323447629}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1297,7 +1297,7 @@ GameObject:
   - component: {fileID: 416406769129186591}
   m_Layer: 0
   m_Name: chair_panels
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1382,7 +1382,7 @@ GameObject:
   - component: {fileID: 1056466484714296091}
   m_Layer: 0
   m_Name: Plane.008
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1471,7 +1471,7 @@ GameObject:
   - component: {fileID: 8437406172769453722}
   m_Layer: 0
   m_Name: scene_classroom
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1615,7 +1615,7 @@ GameObject:
   - component: {fileID: 3834223760399893484}
   m_Layer: 0
   m_Name: Plane.009
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1698,7 +1698,7 @@ GameObject:
   - component: {fileID: 6713891463666534432}
   m_Layer: 0
   m_Name: Plane.003
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1781,7 +1781,7 @@ GameObject:
   - component: {fileID: 8685912507923954254}
   m_Layer: 0
   m_Name: Plane.006
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

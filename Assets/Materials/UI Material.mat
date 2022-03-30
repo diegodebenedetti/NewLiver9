@@ -101,7 +101,7 @@ Material:
     - _GlossyReflections: 0
     - _Horizontal_Offset: 5
     - _Metallic: 0
-    - _NoiseAmount: 0.03
+    - _NoiseAmount: 0.01
     - _NoiseScale: 513.9
     - _OcclusionStrength: 1
     - _Parallax: 0.005

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6331622116947596897}
   m_Layer: 0
   m_Name: Plane.018
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3964764432023969126}
   m_Layer: 0
   m_Name: Plane.010
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 2967642827745902382}
   m_Layer: 0
   m_Name: Plane.019
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 5317332846421488576}
   m_Layer: 0
   m_Name: Plane.017
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 5941303217218203148}
   m_Layer: 0
   m_Name: corridor_module (6)
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 8637544849937742554}
   m_Layer: 0
   m_Name: floor_ceiling_module1
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 7482077890563883705}
   m_Layer: 0
   m_Name: Plane.016
-  m_TagString: Untagged
+  m_TagString: Floor/Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 380088819585179496}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 2265417016674755595}
   m_Layer: 0
   m_Name: mirror
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 6486060658989216288}
   m_Layer: 0
   m_Name: Circle.006
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 1629992477841190595}
   m_Layer: 0
   m_Name: bathroom
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 4811495407327187319}
   m_Layer: 0
   m_Name: Circle.010
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 1178018691427687243}
   m_Layer: 0
   m_Name: NurbsPath.004
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -560,7 +560,7 @@ GameObject:
   - component: {fileID: 6900437052887332744}
   m_Layer: 0
   m_Name: NurbsPath.008
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 8615321847601176433}
   m_Layer: 0
   m_Name: Circle.003
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -726,7 +726,7 @@ GameObject:
   - component: {fileID: 6154007262383960226}
   m_Layer: 0
   m_Name: Circle.004
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -809,7 +809,7 @@ GameObject:
   - component: {fileID: 2695142670845073507}
   m_Layer: 0
   m_Name: mirror.001
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 3725810652721395036}
   m_Layer: 0
   m_Name: NurbsPath.001
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -975,7 +975,7 @@ GameObject:
   - component: {fileID: 7233025865649582786}
   m_Layer: 0
   m_Name: model
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1058,7 +1058,7 @@ GameObject:
   - component: {fileID: 4721672872890214809}
   m_Layer: 0
   m_Name: NurbsPath
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 1312080616589198668}
   m_Layer: 0
   m_Name: Circle.007
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1224,7 +1224,7 @@ GameObject:
   - component: {fileID: 676753787968817345}
   m_Layer: 0
   m_Name: NurbsPath.006
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1307,7 +1307,7 @@ GameObject:
   - component: {fileID: 1064870222046496978}
   m_Layer: 0
   m_Name: Circle.011
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1390,7 +1390,7 @@ GameObject:
   - component: {fileID: 2670710852743133840}
   m_Layer: 0
   m_Name: NurbsPath.007
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1473,7 +1473,7 @@ GameObject:
   - component: {fileID: 7373841425365164308}
   m_Layer: 0
   m_Name: NurbsPath.005
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1556,7 +1556,7 @@ GameObject:
   - component: {fileID: 1974758973007782647}
   m_Layer: 0
   m_Name: Plane.001
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1639,7 +1639,7 @@ GameObject:
   - component: {fileID: 8207939479242266652}
   m_Layer: 0
   m_Name: Circle.001
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1722,7 +1722,7 @@ GameObject:
   - component: {fileID: 7094266807862280909}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1805,7 +1805,7 @@ GameObject:
   - component: {fileID: 2318540123658497509}
   m_Layer: 0
   m_Name: NurbsPath.003
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1888,7 +1888,7 @@ GameObject:
   - component: {fileID: 6221714428627790158}
   m_Layer: 0
   m_Name: Circle.009
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1971,7 +1971,7 @@ GameObject:
   - component: {fileID: 1228182763907228745}
   m_Layer: 0
   m_Name: Circle.002
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2054,7 +2054,7 @@ GameObject:
   - component: {fileID: 1709599164530032180}
   m_Layer: 0
   m_Name: NurbsPath.002
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2137,7 +2137,7 @@ GameObject:
   - component: {fileID: 373452045948142763}
   m_Layer: 0
   m_Name: model.001
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2220,7 +2220,7 @@ GameObject:
   - component: {fileID: 1935527470684286405}
   m_Layer: 0
   m_Name: Circle.008
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2303,7 +2303,7 @@ GameObject:
   - component: {fileID: 2599581860742097451}
   m_Layer: 0
   m_Name: Circle.005
-  m_TagString: Untagged
+  m_TagString: Floor/Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

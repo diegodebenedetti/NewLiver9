@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(AnimationCam(time,direction,amplitude));
     }
-
+    
     public void HeadBobbing()
     {
         if(_bobUp)
