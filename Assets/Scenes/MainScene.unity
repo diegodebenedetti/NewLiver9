@@ -703,8 +703,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 980535826}
     - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: _postExpoNormal
+      propertyPath: _postExpoFlash
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _postExpoNormal
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1455087406149215734, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
