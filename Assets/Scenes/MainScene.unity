@@ -554,6 +554,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1993305437301501236, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: m_Cookie
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3884612229962612603, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0
@@ -577,6 +581,10 @@ PrefabInstance:
     - target: {fileID: 4567075568692546711, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -209.99963
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813358282729612027, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _flashInstenity
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 4825543305527771611, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: _headBobbingSpeed
@@ -689,6 +697,14 @@ PrefabInstance:
     - target: {fileID: 5717862187914145759, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _volume
+      value: 
+      objectReference: {fileID: 980535826}
+    - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _postExpoNormal
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1455087406149215734, guid: 08028fc0357cc534c805501ab93caa78, type: 3}

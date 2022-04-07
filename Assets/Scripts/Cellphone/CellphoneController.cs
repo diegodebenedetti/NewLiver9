@@ -11,6 +11,9 @@ using Enemy;
 
 public class CellphoneController : MonoBehaviour
 { 
+    
+    public static event Action OnTakePicture = delegate { };
+
     [Header("Cellphone detection")]
     [SerializeField] float _distance;
     [SerializeField] float _detectionHeight;
@@ -34,20 +37,25 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] Transform _needlePivot;
     [SerializeField] Image _noiseScreen;   
     [SerializeField] float _needleTimeToReturn;
-    [SerializeField] LightEffect _cellPhoneLight; 
+    [SerializeField] CellphoneLight _cellPhoneLight; 
     EnemyAI _enemyAI; 
     GameObject _enemy;
-    RaycastHit _hit;
+    RaycastHit _hit;  
+    Animator _anim;
     CameraController _cameraController;
     float _pingNoise, _pingTime, _pingTimer, _enemyScare, timer;
     Vector3 _needleOrignialPos; 
     Ray ray;
     private bool _isEnemyDead, _isEnemyEscaping, _isEnemyInsideRange; 
-    void Start()
-    {
+    void Awake()
+    { 
         _enemy = GameObject.FindObjectOfType<EnemyAI>().gameObject;
         _enemyAI = _enemy?.GetComponent<EnemyAI>();
         _cameraController = GetComponentInParent<CameraController>();
+        _anim = GetComponent<Animator>();
+    }
+    void Start()
+    {
         _needleOrignialPos = _needlePivot.localPosition; 
         EnemyAI.OnEnemyScareChange += HandleScareChange;
         EnemyAI.OnStateChange += OnStateChange;
@@ -76,11 +84,13 @@ public class CellphoneController : MonoBehaviour
     { 
         if(Input.GetButtonDown("Fire1"))
         {
-            _cellPhoneLight.DoFlash();
+            _anim?.SetTrigger("PressButton");
+            OnTakePicture.Invoke();
             if(_enemyScare >= _enemyAI.MaterializeThreshold)
                 _enemyAI.Materialize(); 
         }
     }
+ 
     private IEnumerator AltFFourToExit()
     {
         yield return new WaitForSeconds(13f);

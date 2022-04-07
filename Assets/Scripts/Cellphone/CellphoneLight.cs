@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Light))]
-public class LightEffect : MonoBehaviour
+public class CellphoneLight : MonoBehaviour
 {
     [Header("Flicker")]
     [SerializeField] float _maxTime;
@@ -13,7 +13,6 @@ public class LightEffect : MonoBehaviour
     [SerializeField] float _flashInstenity;
     [SerializeField] float _flashTime, _flashDiminshFactor;
     [SerializeField] UnityEvent _flashEvent;   
-    [SerializeField] Animator anim;
 
     Light _light;
     float _timer, _originalIntesity, _enemyScare;
@@ -25,14 +24,13 @@ public class LightEffect : MonoBehaviour
     void Start() 
     { 
         _originalIntesity = _light.intensity;
-        _timer = Random.Range(_minTime, _maxTime);
+        _timer = Random.Range(_minTime, _maxTime); 
     }
 
     bool _doingFlash;
     void EnemyScare(float scare) => _enemyScare = scare;
     void OnEnable() => StartCoroutine(Flicker());
-    void OnDisable() => StopAllCoroutines();
-     
+    void OnDisable() => StopAllCoroutines(); 
     void Update()
     {
         if(!_doingFlash)
@@ -44,15 +42,15 @@ public class LightEffect : MonoBehaviour
                 _timer = Random.Range(_minTime, _maxTime) - (_enemyScare/100f * _scareFactor);
                 StartCoroutine(Flicker());
             }
-        }
-       
+            _light.type = LightType.Spot; 
+        } 
     }
 
     public void DoFlash()
-    {
-        StartCoroutine(Flash());
+    { 
         _flashEvent.Invoke();
-        anim.SetTrigger("PressButton");
+        _light.type = LightType.Point;
+        StartCoroutine(Flash());
     } 
     IEnumerator Flicker()
     {

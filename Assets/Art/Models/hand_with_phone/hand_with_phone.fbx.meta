@@ -24,6 +24,9 @@ ModelImporter:
   - first:
       74: -1541066076466024020
     second: hand_phone_rig|handphone_press_button
+  - first:
+      74: -7470372594639711827
+    second: hand_phone_rig|handphone_press_button (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -54,8 +57,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: hand_phone_rig|handphone_idle
-      takeName: hand_phone_rig|handphone_idle
+      name: hand_phone_rig|handphone_press_button (1)
+      takeName: hand_phone_rig|handphone_press_button
       internalID: 0
       firstFrame: 0
       lastFrame: 59
@@ -77,7 +80,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.2821066
+        functionName: DoFlash
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 597048a61178b394ea3936b62f37afa9, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
