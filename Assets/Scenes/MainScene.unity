@@ -427,6 +427,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 20911050, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 129403501, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
     - target: {fileID: 1382160936, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_Volume
       value: 1
@@ -462,10 +470,6 @@ PrefabInstance:
     - target: {fileID: 4567075568692546711, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -209.99963
-      objectReference: {fileID: 0}
-    - target: {fileID: 4813358282729612027, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: _flashInstenity
-      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 4825543305527771611, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: _headBobbingSpeed
@@ -584,12 +588,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 980535826}
     - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _resWidth
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _resHeight
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: _postExpoFlash
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
       propertyPath: _postExpoNormal
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _cellphoneCamera
+      value: 
+      objectReference: {fileID: 1988190188}
+    - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: _enemyLensDistortion
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1455087406149215734, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
@@ -2047,6 +2067,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1988190188 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5717862188428940934, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+  m_PrefabInstance: {fileID: 276176577}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2040438005
 GameObject:
   m_ObjectHideFlags: 0

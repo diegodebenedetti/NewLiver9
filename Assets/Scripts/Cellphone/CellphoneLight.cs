@@ -12,7 +12,8 @@ public class CellphoneLight : MonoBehaviour
     [Header("Flash")]
     [SerializeField] float _flashInstenity;
     [SerializeField] float _flashTime, _flashDiminshFactor;
-    [SerializeField] UnityEvent _flashEvent;   
+    [SerializeField] UnityEvent _flashEvent;  
+     
 
     Light _light;
     float _timer, _originalIntesity, _enemyScare;

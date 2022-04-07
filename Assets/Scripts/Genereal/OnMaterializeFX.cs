@@ -32,10 +32,10 @@ public class OnMaterializeFX : MonoBehaviour
                 AudioManager.Instance.Play("monster7");
                 AudioManager.Instance.Play("materializedAmbient");
 
-                LeanTween.value(0f, 0.5f, 1f).setOnUpdate((float val) =>
+                LeanTween.value(0f, 1f, 0.5f).setOnUpdate((float val) =>
                 {
                     Distorsion.intensity.value = val;
-                }).setEaseInOutSine().setLoopPingPong(3);
+                }).setEaseInOutSine().setLoopPingPong(1);
 
                 break;
             case EnemyState.Materialized:
