@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ----------------------[MAIN MENU]
       objectReference: {fileID: 0}
+    - target: {fileID: 4840227298105620034, guid: 9e7e2e95b8e34e98b498527a1bf85a07, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4840227298105620038, guid: 9e7e2e95b8e34e98b498527a1bf85a07, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -340,28 +344,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ----------------------[Player]
       objectReference: {fileID: 0}
-    - target: {fileID: 5717862188753831829, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5717862188753831829, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5717862188753831829, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: _resWidth
-      value: 800
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: _resHeight
-      value: 800
-      objectReference: {fileID: 0}
-    - target: {fileID: 8869256746469926808, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
-      propertyPath: _photoTimeOnScreen
+    - target: {fileID: 5717862189559181174, guid: 08028fc0357cc534c805501ab93caa78, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1000,6 +984,12 @@ MonoBehaviour:
     volume: 0.7
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: Flash
+    clip: {fileID: 8300000, guid: 78a213101d17b1f479909b69eb10da7a, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
 --- !u!4 &995351414
 Transform:

@@ -23,7 +23,7 @@ public class RainTrigger : MonoBehaviour
         while(timer > 0f)
         {
             timer -= Time.deltaTime;
-            AudioManager.Instance.SetVolume(_soundName,Mathf.Lerp(sounds.source.volume, volumeUp ? _maxVolume : _minVolume, timer/_time));
+            AudioManager.Instance.SetVolume(_soundName,Mathf.Lerp(sounds.source.volume, volumeUp ? _maxVolume : _minVolume, _time/timer));
             yield return null;
         }
  
