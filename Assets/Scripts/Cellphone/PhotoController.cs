@@ -10,11 +10,9 @@ public class PhotoController : MonoBehaviour
 { 
     [SerializeField] Image _img;
     [SerializeField] CellphoneLight _cellphoneLight;
-    [SerializeField] Camera _cellphoneCamera;
-    [SerializeField] RenderTexture _texture;
-    [SerializeField] float _timeOnScreen, _flashTime, _postExpoFlash, _postExpoNormal, _enemyLensDistortion;
-    [SerializeField] int _resWidth, _resHeight;
-    [SerializeField] Texture2D _screenCapture;
+    [SerializeField] Camera _cellphoneCamera; 
+    [SerializeField] float _timeOnScreen,_photoTimeOnScreen, _flashTime, _postExpoFlash, _postExpoNormal;
+    [SerializeField] int _resWidth, _resHeight; 
     [SerializeField] Volume _volume;
     ColorAdjustments _colorAdj;
     LensDistortion _distorsion;
@@ -31,43 +29,45 @@ public class PhotoController : MonoBehaviour
     public void TakePicture() => StartCoroutine(TakePictureRoutine());
     public void OnEnemyState(EnemyState state) => _enemyState = state;
     private IEnumerator TakePictureRoutine()
-    { 
+    {
         _cellphoneLight.DoFlash();
         _colorAdj.postExposure.value = _postExpoFlash;
- 
+
         yield return new WaitForSeconds(_flashTime);
         _colorAdj.postExposure.value = _postExpoNormal;
-        _img.gameObject.SetActive(true); 
-        yield return new WaitForSeconds(_timeOnScreen);  
+        _img.gameObject.SetActive(true);
+        yield return new WaitForSeconds(_timeOnScreen);
         _img.gameObject.SetActive(false);
-        // Screenshot();
-        yield return new WaitForSeconds(_timeOnScreen * 3);  
-    }
 
-
-    void OnDestroy()
-    {
-         CellphoneController.OnTakePicture -= TakePicture;
-    }
-     public static string ScreenShotName(int width, int height) {
-         return string.Format("{0}/screenshots/screen_{1}x{2}_{3}.png", 
-                              Application.dataPath, 
-                              width, height, 
-                              System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
-     }
-  
-    void Screenshot() 
-    {  
+        var defaultRenderTexture = _cellphoneCamera.targetTexture;
         RenderTexture rt = new RenderTexture(_resWidth, _resHeight, 24);
         _cellphoneCamera.targetTexture = rt;
-        Texture2D screenShot = new Texture2D(_resWidth, _resHeight, TextureFormat.RGB24, false);
-        _cellphoneCamera.Render(); 
+        Texture2D screenShot = new Texture2D(_resWidth, _resHeight, TextureFormat.RGB24, false);  
+        _cellphoneCamera.Render();
+        yield return new WaitForEndOfFrame();
         screenShot.ReadPixels(new Rect(0, 0, _resWidth, _resHeight), 0, 0);
-        _cellphoneCamera.targetTexture = null; 
+        screenShot.Apply();
+        _cellphoneCamera.targetTexture = defaultRenderTexture;
         Destroy(rt);
-        byte[] bytes = screenShot.EncodeToPNG();
-        string filename = ScreenShotName(_resWidth, _resHeight);
-        System.IO.File.WriteAllBytes(filename, bytes);
-        Debug.Log(string.Format("Took screenshot to: {0}", filename)); 
+
+        // byte[] bytes = screenShot.EncodeToPNG();
+        // string filename = ScreenShotName(_resWidth, _resHeight);
+        // System.IO.File.WriteAllBytes(filename, bytes);
+        // Debug.Log(string.Format("Took screenshot to: {0}", filename));
+         
+        _img.gameObject.SetActive(true); 
+        _img.color = Color.white;
+        _img.material.mainTexture = screenShot;
+
+        yield return new WaitForSeconds(_photoTimeOnScreen); 
+
+        _img.color = Color.black;
+        _img.material.mainTexture = null;
+        _img.gameObject.SetActive(false); 
     }
+
+
+    void OnDestroy() => CellphoneController.OnTakePicture -= TakePicture; 
+  
+   
 }

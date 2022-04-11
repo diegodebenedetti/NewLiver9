@@ -56,7 +56,18 @@ public class AudioManager : Singleton<AudioManager>
 
     }
 
-
+    public void SetVolume(string name, float vol)
+    {
+        Sound snd = Array.Find(sounds, sound => sound.name == name);
+        try
+        {
+            snd.source.volume = vol;
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("sound not found");
+        }
+    }
     public void Stop(string name)
     {
         Sound snd = Array.Find(sounds, sound => sound.name == name);
