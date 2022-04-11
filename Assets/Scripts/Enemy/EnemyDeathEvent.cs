@@ -15,6 +15,8 @@ public class EnemyDeathEvent : MonoBehaviour
         if(state == EnemyState.Dead)
         {
             AudioManager.Instance.Stop("Ambient");
+            AudioManager.Instance.Stop("Rain"); 
+            AudioManager.Instance.Stop("heartbeat");
             AudioManager.Instance.Play("Ending");
             StartCoroutine(Light()); 
         }
@@ -23,6 +25,7 @@ public class EnemyDeathEvent : MonoBehaviour
 
     IEnumerator Light()
     { 
+        
         RenderSettings.skybox = _newSkybox; 
         _sunLight.color = _color;
         var timer = 0f;

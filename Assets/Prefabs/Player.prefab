@@ -1766,6 +1766,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 129403501}
     - target: {fileID: 3768390666900871683, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
+      propertyPath: _soundName
+      value: Flash
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768390666900871683, guid: 3d53c955df159f945932c2b03732d9cb, type: 3}
       propertyPath: _cellphoneLight
       value: 
       objectReference: {fileID: 4813358282729612027}
