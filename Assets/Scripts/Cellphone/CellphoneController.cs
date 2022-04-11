@@ -127,7 +127,7 @@ public class CellphoneController : MonoBehaviour
     }
     private void DoDetectionEffect()
     {   
-        _noiseScreen.material.SetFloat("_NoiseAmount", _distance / EnemyDistance() * _noiseAmount);
+        _noiseScreen?.material.SetFloat("_NoiseAmount", _distance / EnemyDistance() * _noiseAmount);
         PerformPingNoise();
         if(!_isEnemyDead)
             ShakeCamera(); 
@@ -174,7 +174,8 @@ public class CellphoneController : MonoBehaviour
         { 
             try
             {
-                _isEnemyInsideRange = Physics.OverlapSphere(transform.position, _radius, _layers).FirstOrDefault(x => x.gameObject == _enemy)?.gameObject != null;
+                _isEnemyInsideRange = Physics.OverlapSphere(transform.position, _radius, _layers).
+                                        FirstOrDefault(x => x.gameObject == _enemy)?.gameObject != null;
                 
 
                 if(_isEnemyInsideRange)
