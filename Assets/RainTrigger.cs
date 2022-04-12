@@ -16,14 +16,15 @@ public class RainTrigger : MonoBehaviour
 
     IEnumerator VolumeDownCoroutine()
     {
-        timer = _time; 
+        timer = 0; 
         Sound sounds = Array.Find(AudioManager.Instance.sounds, sound => sound.name == _soundName);
         bool volumeUp = sounds.source.volume == _minVolume;
         
-        while(timer > 0f)
+        while(timer < _time)
         {
-            timer -= Time.deltaTime;
-            AudioManager.Instance.SetVolume(_soundName,Mathf.Lerp(sounds.source.volume, volumeUp ? _maxVolume : _minVolume, _time/timer));
+            timer += Time.deltaTime;
+            var lerp = timer/_time;
+            AudioManager.Instance.SetVolume(_soundName,Mathf.Lerp(sounds.source.volume, volumeUp ? _maxVolume : _minVolume, lerp));
             yield return null;
         }
  

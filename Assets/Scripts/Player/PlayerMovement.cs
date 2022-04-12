@@ -36,8 +36,8 @@ public class PlayerMovement : MonoBehaviour
         tutorial_helper_method.OnTutorialEnded += OnTutorialEnded;
     }
 
-    private void OnTutorialEnded() => _canMove = true;
-
+    private void OnTutorialEnded() => SetMove(true);
+    public void SetMove(bool move) => _canMove = move;
     void Update()
     {
         if(!_canMove) return;

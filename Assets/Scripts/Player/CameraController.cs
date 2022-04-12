@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
 
     private void OnTutorialEnded()
     {
-        _canMove = true;
+        SetMove(true);
         SetMouse();
     }
 
@@ -37,11 +37,13 @@ public class CameraController : MonoBehaviour
         Cursor.visible = _mouseEnable;
     }
 
+    public void SetMove(bool move) => _canMove = move;
     void LateUpdate()
     {
         if (!_canMove) return;
         moveCamera();
     }
+ 
     void moveCamera()
     {    
         var inputx = Input.GetAxis("Mouse Y");

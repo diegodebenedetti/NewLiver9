@@ -45,7 +45,7 @@ public class CellphoneController : MonoBehaviour
     RaycastHit _hit;  
     Animator _anim;
     CameraController _cameraController;
-    float _pingNoise, _pingTime, _pingTimer, _enemyScare, timer, _photoTimer;
+    float _pingNoise, _pingTime, _pingTimer, _enemyScare, _needleTimer, _photoTimer;
     Vector3 _needleOrignialPos; 
     Ray ray;
     private bool _isEnemyDead, _isEnemyEscaping, _isEnemyInsideRange; 
@@ -74,10 +74,10 @@ public class CellphoneController : MonoBehaviour
                 _isEnemyDead = true;
                 StartCoroutine(AltFFourToExit());
                 break;
-            case EnemyState.Hiding: 
+            case EnemyState.Escaping: 
                 _shakeAmplitude = 0;
                 _shakeTime = 0; 
-                timer = _needleTimeToReturn;
+                _needleTimer = 0;
                 _isEnemyEscaping = true;
                 ResetNeedle();
                 break;
@@ -131,13 +131,19 @@ public class CellphoneController : MonoBehaviour
             MoveNeedle(_enemyScare);
         else
         {
-            if(timer > 0)
+            if(_needleTimer < _needleTimeToReturn)
             {
-                timer -= Time.deltaTime;
-                MoveNeedle(_needlePivot.localEulerAngles.z * timer/_needleTimeToReturn);
+                _needleTimer += Time.deltaTime;
+                LeanTween.value(180f, 0f, _needleTimeToReturn).setOnUpdate((float val) =>
+                {  
+                    MoveNeedle(val);
+                }).setEaseInOutSine() ;  
             }
             else   
+            { 
+                _needleTimer = 0f;
                 _isEnemyEscaping = false;
+            }
         }
     }
     private void DoDetectionEffect()
@@ -168,7 +174,7 @@ public class CellphoneController : MonoBehaviour
         _pingNoise = 0f;
         _pingTime = 0f;
         _pingTimer = 0f;
-                 
+        
     }
     void MoveNeedle(float rotation) => _needlePivot.localEulerAngles = new Vector3(0,0, 1.8f * -rotation); 
     void ShakeCamera() => _cameraController.Shake(_shakeTime, _shakeDirection, _shakeAmplitude * _enemyScare/_enemyAI.MaterializeThreshold);
@@ -202,8 +208,7 @@ public class CellphoneController : MonoBehaviour
                         _enemyAI.IncreaseMaterializeFactor();   
                 }
                 else
-                {  
-                    _noiseScreen.material.SetFloat("_NoiseAmount", 0f); 
+                {   
                     ResetNeedle();
                 } 
             }

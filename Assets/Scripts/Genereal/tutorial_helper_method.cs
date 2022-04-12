@@ -54,7 +54,10 @@ public class tutorial_helper_method : MonoBehaviour
                 StartCoroutine(tutorial());
         } 
         else
+        {
+            _hasTutorialEnded = true;
             OnTutorialEnded.Invoke(); 
+        }
         
     }
 
