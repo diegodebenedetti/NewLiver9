@@ -17,6 +17,7 @@ public class EnemyDeathEvent : MonoBehaviour
             AudioManager.Instance.Stop("Ambient");
             AudioManager.Instance.Stop("Rain"); 
             AudioManager.Instance.Stop("heartbeat");
+            AudioManager.Instance.Stop("materializedAmbient");
             AudioManager.Instance.Play("Ending");
             StartCoroutine(Light()); 
         }

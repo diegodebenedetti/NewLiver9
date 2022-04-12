@@ -1510,7 +1510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -17.582499, y: 0.79999924}
+  m_AnchoredPosition: {x: -17.5825, y: 0.79999924}
   m_SizeDelta: {x: -35.164997, y: -69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7294382470916229959
@@ -2548,6 +2548,7 @@ MonoBehaviour:
   _pingTimeMax: 1
   _pingTimeMin: 0.025
   _noiseAmount: 0.25
+  _photoFlickerTimer: 0.1
   _shakeDirection: {x: 0, y: 0, z: 0}
   _shakeTime: 0.1
   _shakeAmplitude: 0.05
@@ -2555,6 +2556,7 @@ MonoBehaviour:
   _noiseScreen: {fileID: 0}
   _needleTimeToReturn: 1
   _cellPhoneLight: {fileID: 0}
+  _photoImage: {fileID: 4338956127676418029}
 --- !u!114 &3768390666900871683
 MonoBehaviour:
   m_ObjectHideFlags: 0

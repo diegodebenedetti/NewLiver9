@@ -38,6 +38,7 @@ public class PhotoController : MonoBehaviour
 
         yield return new WaitForSeconds(_flashTime);
         _colorAdj.postExposure.value = _postExpoNormal;
+
         _img.gameObject.SetActive(true);
         yield return new WaitForSeconds(_timeOnScreen);
         _img.gameObject.SetActive(false);
@@ -62,6 +63,7 @@ public class PhotoController : MonoBehaviour
     {
         var defaultRenderTexture = _cellphoneCamera.targetTexture;
         _ui.SetActive(false);
+        
         RenderTexture rt = new RenderTexture(_resWidth, _resHeight, 24);
         _cellphoneCamera.targetTexture = rt;
         Texture2D screenShot = new Texture2D(_resWidth, _resHeight, TextureFormat.RGB24, false);
@@ -71,10 +73,10 @@ public class PhotoController : MonoBehaviour
         _cellphoneCamera.targetTexture = defaultRenderTexture;
         RenderTexture.active = null; // JC: added to avoid errors
         Destroy(rt);
-        byte[] bytes = screenShot.EncodeToPNG();
-        string filename = ScreenShotName(_resWidth, _resHeight);
-        System.IO.File.WriteAllBytes(filename, bytes);
-        Debug.Log(string.Format("Took screenshot to: {0}", filename));
+        // byte[] bytes = screenShot.EncodeToPNG();
+        // string filename = ScreenShotName(_resWidth, _resHeight);
+        // System.IO.File.WriteAllBytes(filename, bytes);
+        // Debug.Log(string.Format("Took screenshot to: {0}", filename));
         return screenShot;
     }
 

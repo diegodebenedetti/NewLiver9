@@ -29,6 +29,7 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] float _pingTimeMax;
     [SerializeField] float _pingTimeMin;
     [SerializeField] float _noiseAmount; 
+    [SerializeField] float _photoFlickerTimer;
     [Header("Cellphone shake")]
     [SerializeField] Vector3 _shakeDirection;
     [SerializeField] float _shakeTime, _shakeAmplitude;
@@ -38,12 +39,13 @@ public class CellphoneController : MonoBehaviour
     [SerializeField] Image _noiseScreen;   
     [SerializeField] float _needleTimeToReturn;
     [SerializeField] CellphoneLight _cellPhoneLight; 
+    [SerializeField] GameObject _photoImage;
     EnemyAI _enemyAI; 
     GameObject _enemy;
     RaycastHit _hit;  
     Animator _anim;
     CameraController _cameraController;
-    float _pingNoise, _pingTime, _pingTimer, _enemyScare, timer;
+    float _pingNoise, _pingTime, _pingTimer, _enemyScare, timer, _photoTimer;
     Vector3 _needleOrignialPos; 
     Ray ray;
     private bool _isEnemyDead, _isEnemyEscaping, _isEnemyInsideRange; 
@@ -59,6 +61,7 @@ public class CellphoneController : MonoBehaviour
         _needleOrignialPos = _needlePivot.localPosition; 
         EnemyAI.OnEnemyScareChange += HandleScareChange;
         EnemyAI.OnStateChange += OnStateChange;
+        _photoTimer = 0f;
     }
 
     private void OnStateChange(EnemyState pState)
@@ -82,6 +85,18 @@ public class CellphoneController : MonoBehaviour
     }
     private void Update() 
     { 
+        if(_enemyScare >=_enemyAI.MaterializeThreshold)
+        { 
+            if(_photoTimer > _photoFlickerTimer )
+            { 
+                _photoTimer = 0f;
+                _photoImage.SetActive(!_photoImage.activeSelf); 
+            }
+            else
+            { 
+                _photoTimer += Time.deltaTime;
+            }
+        }
         if(Input.GetButtonDown("Fire1"))
         {
             _anim?.SetTrigger("PressButton");
