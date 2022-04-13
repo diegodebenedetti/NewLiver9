@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4840227298105620034, guid: 9e7e2e95b8e34e98b498527a1bf85a07, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4840227298105620038, guid: 9e7e2e95b8e34e98b498527a1bf85a07, type: 3}
       propertyPath: m_Pivot.x
@@ -1373,6 +1373,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Floor/Wood
       objectReference: {fileID: 0}
+    - target: {fileID: 1362838994187480767, guid: 2fdfafa7f63c7964ea8a841d745bd5d7, type: 3}
+      propertyPath: m_TagString
+      value: Floor/Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 3110847211454755574, guid: 2fdfafa7f63c7964ea8a841d745bd5d7, type: 3}
       propertyPath: m_TagString
       value: Floor/Stone
@@ -1492,6 +1496,10 @@ PrefabInstance:
     - target: {fileID: 7253621626645578433, guid: 2fdfafa7f63c7964ea8a841d745bd5d7, type: 3}
       propertyPath: m_TagString
       value: Floor/Stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095593260266721383, guid: 2fdfafa7f63c7964ea8a841d745bd5d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8095593260266721383, guid: 2fdfafa7f63c7964ea8a841d745bd5d7, type: 3}
       propertyPath: m_TagString
