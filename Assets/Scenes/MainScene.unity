@@ -597,7 +597,7 @@ MonoBehaviour:
   _enemySpawnLocations:
   - {fileID: 2058647643}
   - {fileID: 2047105332}
-  _escapeRoute: {fileID: 0}
+  _escapeRoute: {fileID: 794028188}
   _bulletsPool: {fileID: 1410035393}
   _bulletPrefab: {fileID: 5713412783803538890, guid: 472bc4cb94d3c46f6abe715185c12af8, type: 3}
 --- !u!4 &603986713
@@ -920,6 +920,64 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &794028187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 794028188}
+  - component: {fileID: 794028190}
+  - component: {fileID: 794028189}
+  m_Layer: 0
+  m_Name: EscapeLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &794028188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794028187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 74.51, y: 0, z: -6.604}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1282516514}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &794028189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794028187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f4a04d32dee1846b29debde02b8eee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &794028190
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794028187}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 1, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &869245698 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4840227299086866670, guid: 9e7e2e95b8e34e98b498527a1bf85a07, type: 3}
@@ -1511,6 +1569,11 @@ PrefabInstance:
 --- !u!4 &1282516513 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6240541793401414687, guid: 2fdfafa7f63c7964ea8a841d745bd5d7, type: 3}
+  m_PrefabInstance: {fileID: 1282516512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1282516514 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5841277361333165595, guid: 2fdfafa7f63c7964ea8a841d745bd5d7, type: 3}
   m_PrefabInstance: {fileID: 1282516512}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1373354572 stripped
