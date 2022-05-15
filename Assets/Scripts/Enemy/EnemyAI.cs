@@ -1,112 +1,112 @@
 using System;
 using System.Collections;
+using Enemy.EnemyStateMachine;
 using UnityEngine;
 
 namespace Enemy
 {
-    public class EnemyAI : MonoBehaviour
+    public class EnemyAI : EnemyAIStateMachine
     {
         public static event Action<EnemyState> OnStateChange = delegate { };
         public static event Action<float> OnEnemyScareChange = delegate { };
-        public static event Action OnHitRecieved = delegate {};
+        public static event Action OnHitRecieved = delegate { };
 
-        [Header("General Dependencies")] 
+        [Header("General Dependencies")]
         [SerializeField]
         private GameObject _player;
 
-        [SerializeField] 
-        private GameObject _enemyModel;
+        [SerializeField]
+        internal GameObject _enemyModel;
 
-        [SerializeField] private BoxCollider _movementArea;
+        [SerializeField]
+        internal BoxCollider _movementArea;
 
-        [Header("Health")] 
-        [SerializeField] 
+        [Header("Health")]
+        [SerializeField]
         private float _maxHealth = 100f;
-        
-        [Header("On Hiding State")] 
-        [SerializeField]
-        private float _onHidingPositionChangeTimer;
 
-        [Header("On Scared State")] 
+        [Header("On Hiding State")]
         [SerializeField]
-        private float _scareThreshold;
+        internal float _onHidingPositionChangeTimer;
 
-        [SerializeField] 
+        [Header("On Scared State")]
+        [SerializeField]
+        internal float _scareThreshold;
+
+        [SerializeField]
         private float _onScaredPositionChangeTimer;
-        [SerializeField] 
-        private float _runDistanceWhenScared;
-        
+
+        [SerializeField]
+        internal float _runDistanceWhenScared;
+
         [Header("On Materializing State")]
         [SerializeField]
-        private float _onMaterializingRoutineDuration;
-        
-        [Header("On Materialized State")] 
+        internal float _onMaterializingRoutineDuration;
+
+        [Header("On Materialized State")]
         [SerializeField]
-        private float _changeRoomThreshold;
+        internal float _changeRoomThreshold;
+
         [SerializeField]
-        private float _materializeThreshold;
+        internal float _materializeThreshold;
+
         public float MaterializeThreshold => _materializeThreshold;
 
-        [SerializeField] 
+        [SerializeField]
         private float _onMaterializedPositionChangeTimer;
 
-        [Header("On Escape State")] 
+        [Header("On Escape State")]
         [SerializeField]
-        private int[] _escapeThresholds;
+        internal int[] _escapeThresholds;
 
 
         //Components
-        private EnemyMovementController _enemyMovementController;
+        internal EnemyMovementController _enemyMovementController;
         private EnemyAnimationController _enemyAnimationController;
         private EnemyState _currentState;
         public EnemyState CurrentState => _currentState;
-        private Transform _playerTransform;
-        private RotatinMasksController _masksController;
-        
+        internal Transform _playerTransform;
+        internal RotatinMasksController _masksController;
+
 
         //ENEMY TREATS
-        private bool _canReceiveDamage;
+        internal bool _canReceiveDamage;
         private bool _canMove;
-        private float _currentScareLevel;
-        private int _escapeThresholdindex;
+        internal float _currentScareLevel;
+        internal int _escapeThresholdindex;
 
         //STATE RELATED
         //Hide
-        private bool _isHidingInitialized;
-        private float _onHideTimer;
+        protected internal float _onHideTimer;
 
         //Scare
-        private bool _canScare;
-        private bool _isScaredInitialized;
-        private float _onScaredTimer;
-        
+        internal bool _canScare;
+        internal float _onScaredTimer;
+
         //Materializing
-        private bool _isMaterializingInitialized;
-        private float _onMaterializingTimer;
-        
+        internal float _onMaterializingTimer;
+
         //Materialized
-        private bool _canMaterialize;
-        private bool _readyForMaterialize;
-        private bool _isMaterializedInitialized;
-        private float _onMaterializedTimer;
-        
+        internal bool _canMaterialize;
+        internal bool _readyForMaterialize;
+        internal float _onMaterializedTimer;
+
 
         //Escape
-        private bool _canEscape;
-        private bool _isEscapingInitialized;
+        internal bool _canEscape;
 
         //Dead
         private bool _isDead;
-        private float _currentHealth;
-        private bool _isDeadInitialized;
-        
+        internal float _currentHealth;
+
 
         private void Awake()
         {
             _enemyMovementController = GetComponent<EnemyMovementController>();
             _enemyAnimationController = GetComponent<EnemyAnimationController>();
-            
-            _masksController = GetComponent<RotatinMasksController>(); ;
+
+            _masksController = GetComponent<RotatinMasksController>();
+            ;
             _playerTransform = _player.transform;
             _escapeThresholdindex = 0;
             _currentHealth = _maxHealth;
@@ -114,16 +114,18 @@ namespace Enemy
 
         private void Start()
         {
-            ChangeState(EnemyState.Hiding);
+
+            //ChangeState(EnemyState.Hiding);
+            SetState(new HidingState(this));
             SpawnMasks();
         }
-        
+
 
         private void Update()
         {
+
+            CurrentAIState.RunState();
             CheckDeath();
-            StateUpdate();
-        
 
             DecreaseCellPhoneFocus();
             SendEventOfScareLevel();
@@ -134,236 +136,17 @@ namespace Enemy
             if (_currentHealth <= 0 && !_isDead)
             {
                 _isDead = true;
-                ChangeState(EnemyState.Dead);
+                SetState(new DeadState(this));
             }
         }
 
-        private void StateUpdate()
-        {
-            switch (_currentState)
-            {
-                case EnemyState.Hiding:
-                    OnHiding();
-                    break;
-                case EnemyState.Scared:
-                    OnScared();
-                    break;
-                case EnemyState.Materialized:
-                    OnMaterialized();
-                    break;
-                case EnemyState.Escaping:
-                    OnEscaping();
-                    break;
-                case EnemyState.Dead:
-                    OnDead();
-                    break;
-                case EnemyState.Materializing:
-                    OnMaterializing();
-                    break;
-                default:
-                    OnHiding();
-                    break;
-            }
-        }
-
-      
-
-        #region StateCallbacks
-        
-
-        private void OnHiding()
-        {
-            if (!_isHidingInitialized)
-            {
-                InitializeHidingState();
-            }
-
-            _onHideTimer += Time.deltaTime;
-
-            if (IsTimeToChangeHidingLocation())
-            {
-                Vector3 selectedPosition = Action_SelectRandomPositionInsideMovementArea();
-                _enemyMovementController.SetEnemyDestination(selectedPosition);
-                _onHideTimer = 0;
-            }
-
-            if (_canScare)
-            {
-                ChangeState(EnemyState.Scared);
-            }
-        }
-
-        private bool IsTimeToChangeHidingLocation()
-        {
-            return _onHideTimer >= _onHidingPositionChangeTimer;
-        }
-
-        private void InitializeHidingState()
-        {
-            _enemyModel.SetActive(false);
-            _canReceiveDamage = false;
-            _isHidingInitialized = true;
-         
-        }
-
-        private void OnScared()
-        {
-            if (!_isScaredInitialized)
-            {
-                InitializeScareState();
-            }
-
-            _onScaredTimer += Time.deltaTime;
-            if (_enemyMovementController.HasArrivedToDestination())
-            {
-                Vector3 selectedPosition = Action_SelectRandomPositionFarAwayFromPlayerInsideMovementArea();
-                _enemyMovementController.SetEnemyDestination(selectedPosition);
-                _onScaredTimer = 0;
-            }
-
-            if (_canMaterialize)
-            {
-                ChangeState(EnemyState.Materializing);
-            }
-        }
-    
-        private void InitializeScareState()
-        {
-            _canReceiveDamage = false;
-            _isScaredInitialized = true;
-        }
-        
-        private void OnMaterializing()
-        {
-            if (!_isMaterializingInitialized)
-            {
-                InitializeMaterializingState();
-            }
-
-            _onMaterializingTimer += Time.deltaTime;
-
-            if (_onMaterializingTimer >= _onMaterializingRoutineDuration)
-            {
-                _onMaterializingTimer = 0;
-                ChangeState(EnemyState.Materialized);
-            }
-
-        }
-
-        private void InitializeMaterializingState()
-        {
-            _isMaterializingInitialized = true;
-            _enemyModel.SetActive(true);
-            
-        }
-
-        private void OnMaterialized()
-        {
-            if (!_isMaterializedInitialized)
-            {
-                InitializeMaterializeState();
-                Vector3 seletedPosition = Action_SelectRandomPositionFarAwayFromPlayerInsideMovementArea();
-                _enemyMovementController.SetEnemyDestination(seletedPosition);
-                AudioManager.Instance.Play("monsterMaterialize");
-                
-            }
-
-            _onMaterializedTimer += Time.deltaTime;
-
-           
-            if (_enemyMovementController.HasArrivedToDestination())
-            {
-                Vector3 seletedPosition = Vector3.zero;
-                
-                if (_onMaterializedTimer >= _changeRoomThreshold)
-                {
-                    _onMaterializedTimer = 0;
-                    seletedPosition = Action_ChangeRoom();
-                }
-                else
-                {
-                     seletedPosition = Action_SelectRandomPositionFarAwayFromPlayerInsideMovementArea();
-                    
-                }
-                
-                _enemyMovementController.SetEnemyDestination(seletedPosition);  
-
-            }
-
-            if (_currentHealth <= _escapeThresholds[_escapeThresholdindex])
-            {
-                _escapeThresholdindex++;
-                ChangeState(EnemyState.Escaping);
-            
-            }
-        }
-        
-        private void InitializeMaterializeState()
-        {
-            _isMaterializedInitialized = true;
-            _enemyModel.SetActive(true);
-            _canReceiveDamage = true;
-        }
-        private void OnEscaping()
-        {
-            if (!_isEscapingInitialized)
-            {
-                InitializeEscapingState();
-                AudioManager.Instance.Play("Escape");
-                _masksController.DestroyMask();
-                Escape();
-            }
-
-            if (_enemyMovementController.HasArrivedToDestination() || _canEscape)
-            {
-                SpawnManager.Instance.SendEnemyToRandomSpawnLocation();
-                ResetEnemyState();
-                ChangeState(EnemyState.Hiding);
-            }
-        }
-        private void InitializeEscapingState()
-        {
-            _canReceiveDamage = false;
-            _isEscapingInitialized = true;
-            _currentHealth = 100;
-
-        }
-        private void Escape()
-        {
-            Vector3 escapeRoute = SpawnManager.Instance.GetEscapeRoute().position;
-            _enemyMovementController.SetEnemyDestination(escapeRoute);
-        }
-        private void OnDead()
-        {
-            if (!_isDeadInitialized)
-            {
-                InitializeDeadState();
-                _masksController.MainMaskFinale();
-            }
-        
-        }
-        private void InitializeDeadState()
-        {
-            _isDeadInitialized = true;
-            _canReceiveDamage = false;
-            gameObject.GetComponent<CapsuleCollider>().enabled = false;
-
-        }
-
-        #endregion
         #region Actions
 
-        private Vector3 Action_SelectRandomPositionInsideMovementArea()
-        {
-            Vector3 position = Helpers.ChooseRandomPositionInsideCollider(_movementArea);
-            return position;
-        }
-
-        private Vector3 Action_SelectRandomPositionFarAwayFromPlayerInsideMovementArea()
+        internal Vector3 Action_SelectRandomPositionFarAwayFromPlayerInsideMovementArea()
         {
             float distanceToPlayer = 0;
             Vector3 position = Vector3.zero;
-        
+
             while (distanceToPlayer <= _runDistanceWhenScared)
             {
                 position = Helpers.ChooseRandomPositionInsideCollider(_movementArea);
@@ -373,25 +156,20 @@ namespace Enemy
             return position;
         }
 
-        private Vector3 Action_ChangeRoom()
-        {
-            return SpawnManager.Instance.GetRandomRoom();
-        }
-
         #endregion
         #region Public Methods
-    
+
         public void SetEscapeReady()
         {
             _canEscape = true;
         }
-    
+
         public void Damage(float pAmount)
         {
             if (!_canReceiveDamage) return;
-        
+
             if (_currentHealth <= 0) return;
-        
+
             _currentHealth -= pAmount;
             var ouchindex = UnityEngine.Random.Range(0, 2);
             AudioManager.Instance.Play($"Ouch{ouchindex}");
@@ -400,31 +178,12 @@ namespace Enemy
 
         public void IncreaseMaterializeFactor()
         {
-            switch (_currentState)
-            {
-                case EnemyState.Hiding:
-
-                    IncreaseCellPhoneFocusByFactor(8f);
-                    if (_currentScareLevel >= _scareThreshold)
-                        _canScare = true;
-
-                    break;
-                case EnemyState.Scared:
-
-                    IncreaseCellPhoneFocusByFactor(15f);
-                    if (_currentScareLevel >= _materializeThreshold)
-                    {
-                        Mathf.Clamp(_currentScareLevel, 0, 100);
-                       _readyForMaterialize = true;
-                    }
-
-                    break;
-            }
+            CurrentAIState.InteractWithCellPhone();
         }
 
         public void Materialize()
         {
-            if(!_readyForMaterialize) return;
+            if (!_readyForMaterialize) return;
 
             _canMaterialize = true;
         }
@@ -433,11 +192,11 @@ namespace Enemy
         {
             _movementArea = pMovementArea;
         }
-        
+
         #endregion
         #region Private Methods
-        
-        private void IncreaseCellPhoneFocusByFactor(float pFactor = 2f)
+
+        internal void IncreaseCellPhoneFocusByFactor(float pFactor = 2f)
         {
             _currentScareLevel += Time.deltaTime * pFactor;
         }
@@ -449,38 +208,28 @@ namespace Enemy
 
             _currentScareLevel -= Time.deltaTime;
         }
-        
-        private void SendEventOfScareLevel() => OnEnemyScareChange.Invoke(Mathf.Clamp(_currentScareLevel, 0 , 100));
 
-        private void ChangeState(EnemyState pState)
+        private void SendEventOfScareLevel() => OnEnemyScareChange.Invoke(Mathf.Clamp(_currentScareLevel, 0, 100));
+
+        internal void NotifyStateChange(EnemyState pState)
         {
+            OnStateChange(pState);
+            _enemyMovementController.SetEnemySpeed(pState);
             _currentState = pState;
-            OnStateChange(_currentState);
-            
-            _enemyMovementController.SetEnemySpeed(_currentState);
-            
-            Debug.Log(_currentState.ToString());
+            Debug.Log(pState.ToString());
         }
 
-        private void ResetEnemyState()
+        internal void ResetEnemyStats()
         {
             _currentScareLevel = 0;
-
             _canMaterialize = false;
             _canEscape = false;
             _readyForMaterialize = false;
             _canScare = false;
-
-            _isHidingInitialized = false;
-            _isScaredInitialized = false;
-            _isMaterializingInitialized = false;
-            _isMaterializedInitialized = false;
-            _isEscapingInitialized = false;
         }
-        
+
         private void SpawnMasks()
         {
-
             for (int i = 0; i < _escapeThresholds.Length - 1; i++)
             {
                 if (i % 2 == 0)
@@ -493,27 +242,8 @@ namespace Enemy
                 }
             }
         }
-        #endregion
-        #region TestStates
-
-        [ContextMenu("Hide the Motherfucker")]
-        private void SetStateHIding()
-        {
-            ChangeState(EnemyState.Hiding);
-        }
-
-        [ContextMenu("Scare the Motherfucker")]
-        private void SetStateScared()
-        {
-           ChangeState(EnemyState.Scared);
-        }
-
-        [ContextMenu("Materialize the Motherfucker")]
-        private void SetStateMaterialized()
-        {
-            ChangeState(EnemyState.Materializing);
-        }
 
         #endregion
+
     }
 }
