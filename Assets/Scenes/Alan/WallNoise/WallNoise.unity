@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &39776592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 39776594}
+  - component: {fileID: 39776593}
+  m_Layer: 0
+  m_Name: ChaosController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &39776593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39776592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae695294b9f67b54bae07495818e37c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallNoiseMat: {fileID: 2100000, guid: ad8ea4fb68ffe4e4bbc1a1d7b88a7f81, type: 2}
+--- !u!4 &39776594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39776592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5265666, y: 0.7345245, z: -3.1627438}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &153137591
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +184,7 @@ GameObject:
   - component: {fileID: 153137593}
   - component: {fileID: 153137592}
   m_Layer: 0
-  m_Name: Plane (2)
+  m_Name: corridorCeilingNoise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5342,6 +5387,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: corridor_module (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6429010929125258422, guid: 20a3be5591ae5ad43ae85a960c887f7d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20a3be5591ae5ad43ae85a960c887f7d, type: 3}
 --- !u!1 &1419323214
@@ -5360,7 +5409,7 @@ GameObject:
   - component: {fileID: 1419323221}
   - component: {fileID: 1419323220}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: corridorWallNoise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10376,7 +10425,7 @@ GameObject:
   - component: {fileID: 2018547593}
   - component: {fileID: 2018547592}
   m_Layer: 0
-  m_Name: Plane (1)
+  m_Name: corridorFloorNoise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

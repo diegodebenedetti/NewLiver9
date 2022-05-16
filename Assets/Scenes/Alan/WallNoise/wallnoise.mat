@@ -35,8 +35,8 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _alpha_str: 2.22
-    - _contrast: 0.89792085
+    - _alpha_str: 2.5
+    - _contrast: 0.80327094
     - _mix_noise_voronoi_index: 0.043056823
     - _noise2Scale: 17.9
     - _noise_scale: 59.97
